@@ -10,11 +10,16 @@
 		<!-- PLUGINS -->
 		<link rel="stylesheet" href="lib/angular-loading-bar/src/loading-bar.css" media="all">
 		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
+
 		<!-- CUSTOM -->
 		<link rel="stylesheet" href="assets/css/styles.css">
 	</head>
 	<body ng-app="app">
-		<div class="container"><ui-view ></ui-view></div>
+		<div ng-include="'app/shared/header/index.html'"></div>
+		<div class="col-lg-12">
+			<ui-view></ui-view>
+		</div>
 
 		<!-- PLUGINS -->
 		<script text="javascript" src="lib/jquery/jquery-3.2.1.min.js"></script>

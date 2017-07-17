@@ -19,6 +19,12 @@
                 controller: "loginController",
                 controllerAs: "vm"
             })
+            .state('turnover', {
+                url: "/turnover",
+                templateUrl: "app/turnover/index.html",
+                // controller: "loginController",
+                // controllerAs: "vm"
+            })
     }
 
 })()
