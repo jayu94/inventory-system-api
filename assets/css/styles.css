@@ -23,3 +23,16 @@ body {
 .margin-left-5{
 	margin-left:5px;
 }
+
+th{
+	text-align: center;
+	vertical-align: middle !important;
+}
+
+.th-from{
+	background-color:#d9edf7;
+}
+
+.th-to{
+	background-color: #dff0d8;
+}

@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">
-        GOOD RECEIPT&nbsp;
+        ISSUANCE ACCEPTANCE&nbsp;
         <i class="fa fa-print"></i>
       </a>
     </div>
@@ -15,37 +15,66 @@
                 <div class="form-group">
                     <label for="user" class="col-sm-4 control-label">User:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="user" ng-disabled="true">
+                       <div class="input-group">
+                            <input type="text" class="form-control" id="user" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="source" class="col-sm-4 control-label">Source:</label>
+                    <label for="poNo" class="col-sm-4 control-label">PO No.:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="source">
+                        <input type="text" class="form-control" id="poNo" ng-disabled="true">
+                    </div>
+                </div>
+               <div class="form-group">
+                    <label for="mif" class="col-sm-4 control-label">MIF/RR/GR No.:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="mif" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="giNo" class="col-sm-4 control-label">GI No.:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="giNo" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="grNo" class="col-sm-4 control-label">GR No.:</label>
+                    <label for="giNo" class="col-sm-4 control-label">GI No.:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="grNo" ng-disabled="true">
+                        <input type="text" class="form-control" id="giNo" ng-disabled="true">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="grStatus" class="col-sm-4 control-label">GR Status:</label>
+                    <label for="iaNo" class="col-sm-4 control-label">IA No.:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="grStatus" ng-disabled="true">
+                            <input type="text" class="form-control" id="iaNo" ng-disabled="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="iaStatus" class="col-sm-4 control-label">IA Status:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="iaStatus" ng-disabled="true">
                             <span class="input-group-addon"><i class="fa fa-info-circle"></i></span>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="receivingDate" class="col-sm-4 control-label">Receving Date:</label>
+                    <label for="issuanceDate" class="col-sm-4 control-label">Date:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <input type="date" class="form-control" id="receivingDate" placeholder="mm/dd/yyyy">
+                            <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="issuanceDate">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
@@ -64,21 +93,14 @@
                                 <th>Uom</th>
                                 <th>Unit Price</th>
                                 <th>Quantity</th>
-                                <th>Place of Delivery</th>
-                                <th>Asset No.</th>
-                                <th>Serial No.</th>
+                                <th>PO Items</th>
+                                <th>Decision</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="i in [1,2,3,4,5]">
                                 <td class="text-center">{{ i }}</td>
                                 <td>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control input-medium" ng-disabled="true">
-                                        <span class="input-group-addon"><i class="fa fa-list"></i></span>
-                                    </div>
-                                </td>
-                                <td>
                                     <input type="text" class="form-control input-medium" ng-disabled="true">
                                 </td>
                                 <td>
@@ -91,16 +113,16 @@
                                     <input type="text" class="form-control input-medium" ng-disabled="true">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-medium" ng-disabled="false">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true"> 
                                 </td>
                                 <td>
-                                   <input type="text" class="form-control input-medium" ng-disabled="false">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="false">
+                                     <input type="text" class="form-control input-medium" ng-disabled="true">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="false">
+                                    <input type="text" value="Accept" class="form-control input-medium">
                                 </td>
                             </tr>
                         </tbody>
@@ -132,9 +154,7 @@
                 </div>
                 <h4>&nbsp;</h4>
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
-                    <button type="button" class="btn btn-primary pull-right margin-left-30">Save</button>
-                    <button type="button" class="btn btn-primary pull-right">Copy From &and;</button>
+                    <button type="button" class="btn btn-primary pull-right">Submit</button>
                 </div>
             </div>
         </form>

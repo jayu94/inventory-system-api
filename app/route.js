@@ -37,6 +37,30 @@
                 // controller: "loginController",
                 // controllerAs: "vm"
             })
+            .state('issuance', {
+                url: "/issuance",
+                templateUrl: "app/issuance/index.html",
+                // controller: "loginController",
+                // controllerAs: "vm"
+            })
+            .state('issuanceacceptance', {
+                url: "/issuanceacceptance",
+                templateUrl: "app/issuanceacceptance/index.html",
+                // controller: "loginController",
+                // controllerAs: "vm"
+            })
+            .state('warehousetransfer', {
+                url: "/warehousetransfer",
+                templateUrl: "app/warehousetransfer/index.html",
+                // controller: "loginController",
+                // controllerAs: "vm"
+            })
+            .state('returntosupplier', {
+                url: "/returntosupplier",
+                templateUrl: "app/returntosupplier/index.html",
+                // controller: "loginController",
+                // controllerAs: "vm"
+            })
     }
 
 })()
