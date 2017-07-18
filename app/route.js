@@ -61,6 +61,12 @@
                 // controller: "loginController",
                 // controllerAs: "vm"
             })
+            .state('physicalinventory', {
+                url: "/physicalinventory",
+                templateUrl: "app/physicalinventory/index.html",
+                // controller: "loginController",
+                // controllerAs: "vm"
+            })
     }
 
 })()
