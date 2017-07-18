@@ -22,50 +22,58 @@
             .state('turnover', {
                 url: "/turnover",
                 templateUrl: "app/turnover/index.html",
-                // controller: "loginController",
-                // controllerAs: "vm"
+                header: "Turnover",
+                controller: "turnoverController",
+                controllerAs: "vm"
             })
             .state('receivingrequest', {
                 url: "/receivingrequest",
                 templateUrl: "app/receivingrequest/index.html",
-                // controller: "loginController",
-                // controllerAs: "vm"
+                header: "Receiving Request",
+                controller: "receivingRequestController",
+                controllerAs: "vm"
             })
             .state('goodreceipt', {
                 url: "/goodreceipt",
                 templateUrl: "app/goodreceipt/index.html",
-                // controller: "loginController",
-                // controllerAs: "vm"
+                header: "Good Receipt",
+                controller: "goodReceiptController",
+                controllerAs: "vm"
             })
             .state('issuance', {
                 url: "/issuance",
                 templateUrl: "app/issuance/index.html",
-                // controller: "loginController",
-                // controllerAs: "vm"
+                header: "Issuance",
+                controller: "issuanceController",
+                controllerAs: "vm"
             })
             .state('issuanceacceptance', {
                 url: "/issuanceacceptance",
                 templateUrl: "app/issuanceacceptance/index.html",
-                // controller: "loginController",
-                // controllerAs: "vm"
+                header: "Issuance Acceptance",
+                controller: "issuanceAcceptanceController",
+                controllerAs: "vm"
             })
             .state('warehousetransfer', {
                 url: "/warehousetransfer",
                 templateUrl: "app/warehousetransfer/index.html",
-                // controller: "loginController",
-                // controllerAs: "vm"
+                header: "Warehouse Transfer",
+                controller: "warehouseTransferController",
+                controllerAs: "vm"
             })
             .state('returntosupplier', {
                 url: "/returntosupplier",
                 templateUrl: "app/returntosupplier/index.html",
-                // controller: "loginController",
-                // controllerAs: "vm"
+                header: "Return to Supplier",
+                controller: "returnToSupplierController",
+                controllerAs: "vm"
             })
             .state('physicalinventory', {
                 url: "/physicalinventory",
                 templateUrl: "app/physicalinventory/index.html",
-                // controller: "loginController",
-                // controllerAs: "vm"
+                header: "Physical Inventory",
+                controller: "physicalInventoryController",
+                controllerAs: "vm"
             })
     }
 
