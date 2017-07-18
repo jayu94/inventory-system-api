@@ -15,3 +15,11 @@ body {
 
 /* container adjusted */
 .alt-grid .container {width:100%;max-width:none;padding:0;}
+
+.margin-left-30{
+	margin-left:30px;
+}
+
+.margin-left-5{
+	margin-left:5px;
+}

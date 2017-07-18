@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">
-        Turnover Request&nbsp;
+        Good Receipt&nbsp;
         <i class="fa fa-print"></i>
       </a>
     </div>
@@ -13,39 +13,39 @@
         <form action="" class="form form-horizontal">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="requestingUser" class="col-sm-4 control-label">Requesting User:</label>
+                    <label for="user" class="col-sm-4 control-label">User:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="requestingUser" ng-disabled="true">
+                        <input type="text" class="form-control" id="user" ng-disabled="true">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="requestingDepartment" class="col-sm-4 control-label">Requesting Department:</label>
+                    <label for="source" class="col-sm-4 control-label">Source:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="requestingDepartment">
+                        <input type="text" class="form-control" id="source">
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="trNo" class="col-sm-4 control-label">TR No.:</label>
+                    <label for="grNo" class="col-sm-4 control-label">GR No.:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="trNo" ng-disabled="true">
+                        <input type="text" class="form-control" id="grNo" ng-disabled="true">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="trStatus" class="col-sm-4 control-label">TR Status:</label>
+                    <label for="grStatus" class="col-sm-4 control-label">GR Status:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-disabled="true">
+                            <input type="text" class="form-control" id="grStatus" ng-disabled="true">
                             <span class="input-group-addon"><i class="fa fa-info-circle"></i></span>
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="requestingUser" class="col-sm-4 control-label">Request Date:</label>
+                    <label for="receivingDate" class="col-sm-4 control-label">Receving Date:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <input type="date" class="form-control" placeholder="mm/dd/yyyy">
+                            <input type="date" class="form-control" id="receivingDate" placeholder="mm/dd/yyyy">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
@@ -64,10 +64,9 @@
                                 <th>Uom</th>
                                 <th>Unit Price</th>
                                 <th>Quantity</th>
-                                <th>Reason for Turnover</th>
-                                <th>Job Order No</th>
-                                <th>Job Order</th>
-                                <th>Received</th>
+                                <th>Place of Delivery</th>
+                                <th>Asset No.</th>
+                                <th>Serial No.</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -95,19 +94,13 @@
                                     <input type="number" class="form-control input-medium" ng-disabled="false">
                                 </td>
                                 <td>
-                                    <select class="form-control input-medium">
-                                        <option value="">Defective</option>
-                                        <option value="">Other</option>
-                                    </select>
+                                   <input type="text" class="form-control input-medium" ng-disabled="false">
                                 </td>
                                 <td>
                                     <input type="text" class="form-control input-medium" ng-disabled="false">
                                 </td>
                                 <td>
                                     <input type="text" class="form-control input-medium" ng-disabled="false">
-                                </td>
-                                <td class="text-center">
-                                    <input type="checkbox" class="" ng-disabled="false">
                                 </td>
                             </tr>
                         </tbody>
@@ -138,6 +131,11 @@
                     </div>
                 </div>
                 <h4>&nbsp;</h4>
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
+                    <button type="button" class="btn btn-primary pull-right margin-left-30">Save</button>
+                    <button type="button" class="btn btn-primary pull-right">Copy From &and;</button>
+                </div>
             </div>
         </form>
     </div>

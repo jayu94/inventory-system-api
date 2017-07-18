@@ -25,6 +25,18 @@
                 // controller: "loginController",
                 // controllerAs: "vm"
             })
+            .state('receivingrequest', {
+                url: "/receivingrequest",
+                templateUrl: "app/receivingrequest/index.html",
+                // controller: "loginController",
+                // controllerAs: "vm"
+            })
+            .state('goodreceipt', {
+                url: "/goodreceipt",
+                templateUrl: "app/goodreceipt/index.html",
+                // controller: "loginController",
+                // controllerAs: "vm"
+            })
     }
 
 })()
