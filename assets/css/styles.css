@@ -36,3 +36,8 @@ th{
 .th-to{
 	background-color: #dff0d8;
 }
+
+.nav, .pagination, .carousel, .panel-title a 
+{ 
+	cursor: pointer; 
+}

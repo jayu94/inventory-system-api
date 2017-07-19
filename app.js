@@ -3,6 +3,10 @@
 			'ui.router',
 			'angular-loading-bar',
 			'ngStorage',
+			'ui.bootstrap',
+			'ngTouch', 
+			'ngAnimate', 
+			'ngSanitize'
 		])
 		.run(['$rootScope', '$state', 'userService', 'messageService', function run($rootScope, $state, userService, messageService) {
 
