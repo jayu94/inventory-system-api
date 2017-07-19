@@ -83,6 +83,7 @@
 	        vm.rowCount++ //Sample number of count copied from...
         }
 
+        //Adding Row function
         vm.addRow = function(){
 			grDataTable = {};
         	grDataTable.RowNo = vm.rowCount;
@@ -97,6 +98,7 @@
 	        vm.rowCount++ //incrementing row count...
         }
 
+        //Selecting Rows by clicking Row Number
         vm.selectIndex = function(rowNo){
         	var rows = $('tr');
         	vm.oldIndex = angular.isUndefined(vm.oldIndex) || vm.oldIndex == null ? 0 : vm.oldIndex;
@@ -120,6 +122,7 @@
         	}
         }
 
+        //Deleting Row if there's already selected
         vm.deleteRow = function(){
         	var rows = $('tr');
         	var index = vm.grTable.indexOf(vm.indexSelected);
@@ -136,6 +139,7 @@
   			disableButton();
         }
 
+        //Duplicating Row if there's already selected
         vm.duplicateRow = function(){
         	var rows = $('tr');
 
@@ -152,11 +156,13 @@
     		disableButton();
         }
 
+        //Disabling Delete and Duplicate button
         function disableButton(){
         	vm.deleteBtn = true;
         	vm.duplicateBtn = true;
         }
 
+        //Enabling Delete and Duplicate button
         function enableButton(){
         	vm.deleteBtn = false;
         	vm.duplicateBtn = false;
