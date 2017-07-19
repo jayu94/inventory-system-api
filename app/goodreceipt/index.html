@@ -5,13 +5,13 @@
                 <div class="form-group">
                     <label for="user" class="col-sm-4 control-label">User:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="user" ng-disabled="true">
+                        <input type="text" class="form-control" id="user" ng-disabled="true" ng-model='vm.user'>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="source" class="col-sm-4 control-label">Source:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="source">
+                        <input type="text" class="form-control" id="source"  ng-model='vm.source'>
                     </div>
                 </div>
             </div>
@@ -19,14 +19,14 @@
                 <div class="form-group">
                     <label for="grNo" class="col-sm-4 control-label">GR No.:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="grNo" ng-disabled="true">
+                        <input type="text" class="form-control" id="grNo" ng-disabled="true" ng-model='vm.grNo'>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="grStatus" class="col-sm-4 control-label">GR Status:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <input type="text" class="form-control" id="grStatus" ng-disabled="true">
+                            <input type="text" class="form-control" id="grStatus" ng-disabled="true" ng-model='vm.grStatus'>
                             <span class="input-group-addon"><i class="fa fa-info-circle"></i></span>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                     <label for="receivingDate" class="col-sm-4 control-label">Receving Date:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <input type="date" class="form-control" id="receivingDate" placeholder="mm/dd/yyyy">
+                            <input type="date" class="form-control" id="receivingDate" placeholder="mm/dd/yyyy" ng-model='vm.receivingDate'>
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
@@ -59,38 +59,40 @@
                                 <th>Serial No.</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr ng-repeat="i in [1,2,3,4,5]">
-                                <td class="text-center">{{ i }}</td>
+                        <tbody id="grtBody">
+                            <tr ng-repeat="option in vm.grTable">
+                                <td class="text-center" ng-click="vm.selectIndex($index)"><i class="fa fa-arrow-right" aria-hidden="true"></i>{{ option.RowNo }}</td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control input-medium" ng-disabled="true">
+                                        <select class="form-control input-medium" ng-model="option.itemData" ng-options="option.itemCode for option in vm.itemList track by option.itemCode">
+                                             <option value="" disabled selected>--select--</option>
+                                        </select>
                                         <span class="input-group-addon"><i class="fa fa-list"></i></span>
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" value="{{option.itemData.itemName}}">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" value="{{option.itemData.specification}}">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium text-center" ng-disabled="true" value="{{option.itemData.uom}}">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium text-right" ng-disabled="true" value="{{option.itemData.unitPrice}}">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-medium" ng-disabled="false">
+                                    <input type="number" class="form-control input-medium text-center" ng-disabled="false" value="{{option.itemData.quantity}}">
                                 </td>
                                 <td>
-                                   <input type="text" class="form-control input-medium" ng-disabled="false">
+                                   <input type="text" class="form-control input-medium" ng-disabled="false" value="{{option.PlaceOfDelivery}}" ng-model="vm.placeOfDelivery">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="false">
+                                    <input type="text" class="form-control input-medium" ng-disabled="false" value="{{option.AssetNo}}" ng-model="vm.assetNo">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="false">
+                                    <input type="text" class="form-control input-medium" ng-disabled="false" value="{{option.SerialNo}}" ng-model="vm.serialNo">
                                 </td>
                             </tr>
                         </tbody>
@@ -98,9 +100,9 @@
                 </div>
                 <h4>&nbsp;</h4>
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-primary">Add Row</button>
-                    <button type="button" class="btn btn-danger">Delete Row</button>
-                    <button type="button" class="btn btn-default">Duplicate Row</button>
+                    <button type="button" class="btn btn-primary" ng-click="vm.addRow()">Add Row</button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.deleteRow()" ng-disabled="vm.deleteBtn">Delete Row</button>
+                    <button type="button" class="btn btn-default" ng-click="vm.duplicateRow()" ng-disabled="vm.duplicateBtn">Duplicate Row</button>
                 </div>
                 <h5>&nbsp;</h5>
                 <div class="col-md-12">
@@ -124,7 +126,7 @@
                 <div class="col-md-12">
                     <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
                     <button type="button" class="btn btn-primary pull-right margin-left-30">Save</button>
-                    <button type="button" class="btn btn-primary pull-right">Copy From &and;</button>
+                    <button type="button" class="btn btn-primary pull-right" ng-click="vm.copyFrom()">Copy From &and;</button>
                 </div>
             </div>
         </form>
