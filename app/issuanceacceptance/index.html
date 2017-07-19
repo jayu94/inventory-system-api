@@ -88,31 +88,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="i in [1,2,3,4,5]">
-                                <td class="text-center">{{ i }}</td>
-                                <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                            <tr ng-repeat="item in vm.table track by $index" ng-class="{ 'selected': vm.selected == $index }">
+                                <td class="text-center row-item" ng-click="vm.selectIndex($index)">
+                                    <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ $index + 1 }}
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.itemCode">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.itemName">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.specification">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true"> 
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.uom">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.unitPrice"> 
                                 </td>
                                 <td>
-                                     <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.poItems">
                                 </td>
                                 <td>
-                                    <input type="text" value="Accept" class="form-control input-medium">
+                                     <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.itemCode">
+                                </td>
+                                <td>
+                                    <input type="text" value="Accept" class="form-control input-medium" ng-model="item.decision">
                                 </td>
                             </tr>
                         </tbody>
@@ -120,9 +122,9 @@
                 </div>
                 <h4>&nbsp;</h4>
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-primary">Add Row</button>
-                    <button type="button" class="btn btn-danger">Delete Row</button>
-                    <button type="button" class="btn btn-default">Duplicate Row</button>
+                    <button type="button" class="btn btn-primary" ng-click="vm.addRow()">Add Row</button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.deleteRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Delete Row</button>
+                    <button type="button" class="btn btn-default" ng-click="vm.duplicateRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Duplicate Row</button>
                 </div>
                 <h5>&nbsp;</h5>
                 <div class="col-md-12">

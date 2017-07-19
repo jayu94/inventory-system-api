@@ -94,8 +94,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="i in [1]">
-                                <td class="text-center">{{ i }}</td>
+                            <tr ng-repeat="item in vm.table track by $index" ng-class="{ 'selected': vm.selected == $index }">
+                                <td class="text-center row-item" ng-click="vm.selectIndex($index)">
+                                    <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ $index + 1 }}
+                                </td>
                                 <td>
                                     <input type="text" class="form-control input-medium" ng-disabled="true">
                                 </td>
@@ -144,8 +146,8 @@
                 </div>
                 <h4>&nbsp;</h4>
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-primary">Add Row</button>
-                    <button type="button" class="btn btn-danger">Delete Row</button>
+                    <button type="button" class="btn btn-primary" ng-click="vm.addRow()">Add Row</button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.deleteRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Delete Row</button>
                 </div>
                 <h5>&nbsp;</h5>
                 <div class="col-md-12">
@@ -168,6 +170,7 @@
                 <h4>&nbsp;</h4>
                 <div class="col-md-12">
                     <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
+                    <button type="button" class="btn btn-info pull-right margin-left-5">Save as Draft</button>
                     <button type="button" class="btn btn-primary pull-right margin-left-30">Save</button>
                     <button type="button" class="btn btn-success pull-right">Copy From &and;</button>
                 </div>
