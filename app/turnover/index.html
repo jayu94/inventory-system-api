@@ -41,9 +41,8 @@
                     </div>
                 </div>
             </div>
-
             <div class="col-md-12">
-                <div class="table-responsive" style="overflow:auto;">
+                <div class="table-responsive">
                     <table class="table custom-table">
                         <thead>
                             <tr>
@@ -61,43 +60,45 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="i in [1,2,3,4,5]">
-                                <td class="text-center">{{ i }}</td>
+                            <tr ng-repeat="item in vm.table track by $index" ng-class="{ 'selected': vm.selected == $index }">
+                                <td class="text-center row-item" ng-click="vm.selectIndex($index)">
+                                    <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ item.rowNo }}
+                                </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control input-medium" ng-disabled="true">
+                                        <select class="form-control input-medium" ng-options="item as item.itemName for item in vm.items" ng-model="item.itemData"></select>
                                         <span class="input-group-addon"><i class="fa fa-list"></i></span>
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.itemName">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.specification">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.uom">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.unitPrice">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-medium" ng-disabled="false">
+                                    <input type="number" class="form-control input-medium" ng-disabled="false" ng-model="item.quantity">
                                 </td>
                                 <td>
-                                    <select class="form-control input-medium">
+                                    <select class="form-control input-medium" ng-model="item.reasonForTurnover">
                                         <option value="">Defective</option>
                                         <option value="">Other</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="false">
+                                    <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="item.jobOrderNo">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="false">
+                                    <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="item.jobOrder">
                                 </td>
                                 <td class="text-center">
-                                    <input type="checkbox" class="" ng-disabled="false">
+                                    <input type="checkbox" class="" ng-disabled="false" ng-model="item.received">
                                 </td>
                             </tr>
                         </tbody>
@@ -105,9 +106,9 @@
                 </div>
                 <h4>&nbsp;</h4>
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-primary" ng-click="vm.openSearchModal()">Add Row</button>
-                    <button type="button" class="btn btn-danger">Delete Row</button>
-                    <button type="button" class="btn btn-default">Duplicate Row</button>
+                    <button type="button" class="btn btn-primary" ng-click="vm.addRow()">Add Row</button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.deleteRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Delete Row</button>
+                    <button type="button" class="btn btn-default" ng-click="vm.duplicateRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Duplicate Row</button>
                 </div>
                 <h5>&nbsp;</h5>
                 <div class="col-md-12">
@@ -127,12 +128,14 @@
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                <h4>&nbsp;</h4>
-                <div class="col-md-12">
-                    <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
-                    <button type="button" class="btn btn-primary pull-right margin-left-30">Save</button>
-                    <button type="button" class="btn btn-primary pull-right">Copy From &and;</button>
-                </div>
+            </div>
+            <h4>&nbsp;</h4>
+            <div class="col-md-12">
+                <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
+                <button type="button" class="btn btn-primary pull-right margin-left-30">Save</button>
+                <button type="button" class="btn btn-primary pull-right">Copy From &and;</button>
+                <button type="button" class="btn btn-primary" ng-click="vm.openSearchModal()">Search</button>
+                
             </div>
         </form>
     </div>

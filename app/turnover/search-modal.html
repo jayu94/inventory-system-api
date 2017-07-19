@@ -1,9 +1,48 @@
 <div class="modal-header">
-    <h3 class="modal-title" id="modal-title">I'm a modal!</h3>
+    <h3 class="modal-title" id="modal-title">Search Item</h3>
 </div>
 <div class="modal-body" id="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <i class="fa fa-search"></i>
+                    </span>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Item Code/Asset No.</th>
+                            <th class="text-left">Item Name</th>
+                            <th class="text-left">Tag No.</th>
+                            <th class="text-left">Serial No.</th>
+                            <th class="text-left">Location</th>
+                            <th class="text-left">Personal Assignment</th>
+                            <th class="text-left">Cost Center</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="i in [1,2,3,4,5]">
+                            <td>Item Code 1</td>
+                            <td>Item Name 1</td>
+                            <td>TAG NO 001</td>
+                            <td>SER NO 001</td>
+                            <td>Location</td>
+                            <td>Person1</td>
+                            <td>Cost Center</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
-    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
 </div>

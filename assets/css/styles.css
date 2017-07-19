@@ -6,9 +6,9 @@ body {
     min-width: 230px;
 }
 
-.custom-table td {
+/*.custom-table td {
     padding: 2px 2px 5px 2px !important;
-}
+}*/
 
 .alt-grid [class*="col-"] {padding-left:0;padding-right:0}
 .alt-grid .row {margin-left:0;margin-right:0}
@@ -41,7 +41,11 @@ td {
 	background-color: #dff0d8;
 }
 
-.nav, .pagination, .carousel, .panel-title a 
+.nav, .pagination, .carousel, .panel-title a, .row-item 
 { 
 	cursor: pointer; 
+}
+
+tr.selected {
+	background: darkgray;
 }

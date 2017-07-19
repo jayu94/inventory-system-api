@@ -43,7 +43,7 @@
             </div>
 
             <div class="col-md-12">
-                <div class="table-responsive" style="overflow:auto;">
+                <div class="table-responsive">
                     <table class="table custom-table">
                         <thead>
                             <tr>
@@ -60,8 +60,9 @@
                             </tr>
                         </thead>
                         <tbody id="grtBody">
-                            <tr ng-repeat="option in vm.grTable">
-                                <td class="text-center" ng-click="vm.selectIndex($index)"><i class="fa fa-arrow-right" aria-hidden="true"></i>{{ option.RowNo }}</td>
+                            <tr ng-repeat="option in vm.grTable track by $index" ng-class="{ 'selected': vm.selected == $index }">
+                                <td class="text-center row-item" ng-click="vm.selectIndex($index)">
+                                    <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ option.RowNo }}</td>
                                 <td>
                                     <div class="input-group">
                                         <select class="form-control input-medium" ng-model="option.itemData" ng-options="option.itemCode for option in vm.itemList track by option.itemCode">
@@ -71,28 +72,28 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" value="{{option.itemData.itemName}}">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.itemName">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" value="{{option.itemData.specification}}">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.specification">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium text-center" ng-disabled="true" value="{{option.itemData.uom}}">
+                                    <input type="text" class="form-control input-medium text-center" ng-disabled="true" ng-model="option.itemData.uom">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium text-right" ng-disabled="true" value="{{option.itemData.unitPrice}}">
+                                    <input type="text" class="form-control input-medium text-right" ng-disabled="true" ng-model="option.itemData.unitPrice">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-medium text-center" ng-disabled="false" value="{{option.itemData.quantity}}">
+                                    <input type="number" class="form-control input-medium text-center" ng-disabled="false" ng-model="option.itemData.quantity">
                                 </td>
                                 <td>
-                                   <input type="text" class="form-control input-medium" ng-disabled="false" value="{{option.PlaceOfDelivery}}" ng-model="vm.placeOfDelivery">
+                                   <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.PlaceOfDelivery">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="false" value="{{option.AssetNo}}" ng-model="vm.assetNo">
+                                    <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.AssetNo">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="false" value="{{option.SerialNo}}" ng-model="vm.serialNo">
+                                    <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.SerialNo">
                                 </td>
                             </tr>
                         </tbody>
@@ -101,8 +102,8 @@
                 <h4>&nbsp;</h4>
                 <div class="col-md-12">
                     <button type="button" class="btn btn-primary" ng-click="vm.addRow()">Add Row</button>
-                    <button type="button" class="btn btn-danger" ng-click="vm.deleteRow()" ng-disabled="vm.deleteBtn">Delete Row</button>
-                    <button type="button" class="btn btn-default" ng-click="vm.duplicateRow()" ng-disabled="vm.duplicateBtn">Duplicate Row</button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.deleteRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Delete Row</button>
+                    <button type="button" class="btn btn-default" ng-click="vm.duplicateRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Duplicate Row</button>
                 </div>
                 <h5>&nbsp;</h5>
                 <div class="col-md-12">
