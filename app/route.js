@@ -29,7 +29,7 @@
             .state('receivingrequest', {
                 url: "/receivingrequest",
                 templateUrl: "app/receivingrequest/index.html",
-                header: "Receiving Request",
+                header: "Receiving",
                 controller: "receivingRequestController",
                 controllerAs: "vm"
             })

@@ -124,39 +124,38 @@
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <input type="text" class="form-control input-medium" ng-disabled="true">
+                                        <select class="form-control input-medium" ng-model="option.itemData" ng-options="option.itemCode for option in vm.itemList track by option.itemCode">
+                                             <option value="" disabled selected>--select--</option>
+                                        </select>
                                         <span class="input-group-addon"><i class="fa fa-list"></i></span>
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.itemName">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.specification">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.uom">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true"> 
+                                    <input type="text" class="form-control input-medium text-right" ng-disabled="true" ng-model="option.itemData.unitPrice"> 
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium text-center" ng-disabled="true" ng-model="option.itemData.purchasedquantity">
                                 </td>
                                 <td>
-                                    <select class="form-control input-medium">
-                                        <option value="">Defective</option>
-                                        <option value="">Other</option>
-                                    </select>
+                                    <input type="number" class="form-control input-medium text-center" ng-disabled="false" ng-model="option.itemData.receivedquantity">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium">
+                                    <input type="text" class="form-control input-medium" ng-disabled="false">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="false">
                                 </td>
                                 <td class="text-center">
-                                    <input type="text" class="form-control input-medium">
+                                    <input type="text" class="form-control input-medium" ng-disabled="false">
                                 </td>
                             </tr>
                         </tbody>

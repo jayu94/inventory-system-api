@@ -10,8 +10,6 @@
 
         vm.init = function(){
             vm.table = [];
-
-
         }();
 
         vm.selectIndex = function(rowNo){
