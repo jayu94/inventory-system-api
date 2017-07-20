@@ -96,21 +96,21 @@
 
         //Deleting Row if there's already selected
         vm.deleteRow = function(){
-			if(vm.selected >= 0) {
-        		vm.grTable.splice(vm.selected, 1);
-				vm.selected = null;
-			}
+		if(vm.selected >= 0) {
+		vm.grTable.splice(vm.selected, 1);
+			vm.selected = null;
+		}
         }
 
         //Duplicating Row if there's already selected
         vm.duplicateRow = function(){
-			if(vm.selected >= 0){
-				var newRow = {};
-				angular.merge(newRow, vm.grTable[vm.selected]);
-				newRow.RowNo = vm.rowCount;
-				vm.grTable.push(newRow);
-				vm.rowCount++;
-			}
+		if(vm.selected >= 0){
+			var newRow = {};
+			angular.merge(newRow, vm.grTable[vm.selected]);
+			newRow.RowNo = vm.rowCount;
+			vm.grTable.push(newRow);
+			vm.rowCount++;
+		}
         }
     }
 })();
