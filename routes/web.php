@@ -19,14 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/user/types', 'UserTypeController@list');
-
-Route::post('/user/login', 'UserTypeController@dologin');
-
-Route::get('/menus/list', 'MenusController@list');
-
-Route::get('/menus/get/{id}', 'MenusController@item');
-
-Route::get('/payment/pay/{cart_id}', 'PaymentController@makePayment');
-
-Route::get('/cart/get/{id}', 'CartController@getcart');
+Route::get('/goodsreceipt/list', 'GoodsReceiptController@index');
+Route::get('/goodsreceipt/create', 'GoodsReceiptController@store');
+Route::get('/goodsreceipt/delete/{id}', 'GoodsReceiptController@destroy');

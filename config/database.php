@@ -76,6 +76,7 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
+			'pooling' => false
         ],
 
     ],
