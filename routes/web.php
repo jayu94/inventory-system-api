@@ -19,8 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/goodsreceipt/list', 'GoodsReceiptController@index');
-Route::get('/goodsreceipt/create', 'GoodsReceiptController@store');
+Route::get('/goodsreceipt', 'GoodsReceiptController@index');
+//Route::get('/goodsreceipt/', 'GoodsReceiptController@index');
+Route::post('/goodsreceipt', 'GoodsReceiptController@store');
+Route::put('/goodsreceipt', 'GoodsReceiptController@store');
 Route::get('/goodsreceipt/delete/{id}', 'GoodsReceiptController@destroy');
 
 
@@ -30,3 +32,5 @@ Route::post('/warehouse/submit', 'WarehouseController@submit');
 Route::get('/warehouse', 'WarehouseController@index');
 Route::get('/warehouse/{code}', 'WarehouseController@index');
 
+Route::get('/goodsreceipt/items', 'GoodsReceiptController@index');
+Route::get('/goodsreceipt/edit/{id}', 'GoodsReceiptController@show');
