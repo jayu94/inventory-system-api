@@ -60,10 +60,6 @@
 			}
 		];
 
-		vm.getItems = function(query){
-			return itemService.get(query, 10);
-		}
-
         //Copy From function using Dummy Data
         vm.copyFrom = function() {
         	vm.grTable = [];
@@ -121,9 +117,12 @@
 			}
         }
 
+		vm.getItems = function(query){
+			return itemService.get(query, 10);
+		}
+
 		vm.itemSelected = function(line, item){
 			angular.merge(line, item);
-			console.log(item);
 		}
 
 		vm.save = function(){

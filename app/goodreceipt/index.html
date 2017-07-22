@@ -66,11 +66,12 @@
                                 <td>
                                     <div class="input-group">
                                         <input type="text" ng-model="asyncSelected" 
-                                            placeholder="Locations loaded via $http" 
-                                            uib-typeahead="item as (item.ItemCode + ' - ' + item.ItemName) for item in vm.getItems($viewValue)"
+                                            placeholder="Search Item" 
+                                            uib-typeahead="item as item.ItemCode for item in vm.getItems($viewValue)"
                                             typeahead-append-to-body="true"
                                             typeahead-editable="false"
                                             typeahead-on-select="vm.itemSelected(option, $item)"
+                                            typeahead-template-url="app/shared/templates/item-typeahead.html"
                                             typeahead-loading="option.loading"
                                             class="form-control input-medium">
                                         <span class="input-group-addon"><i class="fa" ng-class="{ 'fa-list': !option.loading, 'fa-refresh fa-spin': option.loading }"></i></span>

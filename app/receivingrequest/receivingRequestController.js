@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', receivingRequestController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', 'itemService', receivingRequestController]
 
     angular.module('app').controller('receivingRequestController', receivingRequestController);
 
-    function receivingRequestController($http, $scope, $state, $stateParams) {
+    function receivingRequestController($http, $scope, $state, $stateParams, itemService) {
         var vm = this;
 
         //Dummy Item-List
@@ -62,5 +62,13 @@
                 vm.table.splice(vm.selected, 1);
             }
         }
+
+        vm.getItems = function(query){
+			return itemService.get(query, 10);
+		}
+
+		vm.itemSelected = function(line, item){
+			angular.merge(line, item);
+		}
     }
 })();

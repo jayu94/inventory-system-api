@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', '$uibModal', turnoverController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', '$uibModal', 'itemService', turnoverController]
 
     angular.module('app').controller('turnoverController', turnoverController);
 
-    function turnoverController($http, $scope, $state, $stateParams, $uibModal) {
+    function turnoverController($http, $scope, $state, $stateParams, $uibModal, itemService) {
         var vm = this;
         
         vm.init = function(){
@@ -63,5 +63,13 @@
 				vm.rowCount++;
 			}
         }
+
+        vm.getItems = function(query){
+			return itemService.get(query, 10);
+		}
+
+		vm.itemSelected = function(line, item){
+			angular.merge(line, item);
+		}
     }
 })();

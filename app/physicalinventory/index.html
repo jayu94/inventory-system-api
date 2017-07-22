@@ -185,87 +185,93 @@
                                 <td class="text-center row-item" ng-click="vm.selectIndex($index)">
                                     <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ option.RowNo }}</td>
                                 <!--Item No./Asset No. -->
-                                <td>
+                                <td>    
                                     <div class="input-group">
-                                        <select class="form-control input-medium" ng-model="option.itemData" ng-options="option.itemNo for option in vm.itemList track by option.itemNo">
-                                             <option value="" disabled selected>--select--</option>
-                                        </select>
-                                        <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        <input type="text" ng-model="asyncSelected" 
+                                            placeholder="Search Item" 
+                                            uib-typeahead="item as item.ItemCode for item in vm.getItems($viewValue)"
+                                            typeahead-append-to-body="true"
+                                            typeahead-editable="false"
+                                            typeahead-on-select="vm.itemSelected(option, $item)"
+                                            typeahead-template-url="app/shared/templates/item-typeahead.html"
+                                            typeahead-loading="option.loading"
+                                            class="form-control input-medium">
+                                        <span class="input-group-addon"><i class="fa" ng-class="{ 'fa-list': !option.loading, 'fa-refresh fa-spin': option.loading }"></i></span>
                                     </div>
                                 </td>
                                 <!--Item Description/Asset Description -->
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.description">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Description">
                                 </td>
                                 <!--UoM -->
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.uom">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.UoM">
                                 </td>
                                 <!--Freeze -->
                                 <td>
-                                    <input type="checkbox" class="text-center" ng-model="option.itemData.freeze"> 
+                                    <input type="checkbox" class="text-center" ng-model="option.Freeze"> 
                                 </td>
                                 <!--Counted -->
                                 <td>
-                                    <input type="checkbox" class="text-center" ng-disabled="true" ng-model="option.itemData.counted"> 
+                                    <input type="checkbox" class="text-center" ng-disabled="true" ng-model="option.Counted"> 
                                 </td>
                                 <!--Counter -->
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.counter">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Counter">
                                 </td>
                                 <!--Checker -->
                                 <td>
-                                     <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.checker">
+                                     <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Checker">
                                 </td>
                                 <!--Validator -->
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.validator">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Validator">
                                 </td>
 
                             <!--For Assets and Accountables Items Only -->
                                 <!-- Specification -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.specification">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Specification">
                                 </td>
                                 <!-- Serial No. -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.serialNo">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.SerialNo">
                                 </td>
                                 <!-- Property Tag Code -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.propertyTagCode">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.PropertyTagCode">
                                 </td>
                                 <!-- Location (On Record) -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.locOnRecord">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.LocOnRecord">
                                 </td>
                                 <!-- Location (Physical) -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.itemData.locPhysical">
+                                    <input type="text" class="form-control input-medium" ng-model="option.LocPhysical">
                                 </td>
                                 <!-- Variance -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.itemData.locVariance">
+                                    <input type="text" class="form-control input-medium" ng-model="option.LocVariance">
                                 </td>
                                 <!-- Remarks -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.itemData.locRemarks">
+                                    <input type="text" class="form-control input-medium" ng-model="option.LocRemarks">
                                 </td>
                                 <!-- Asset Status (On Record) -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.itemData.assetStatusOnRecord">
+                                    <input type="text" class="form-control input-medium" ng-model="option.AssetStatusOnRecord">
                                 </td>
                                 <!-- Asset Status (Physical) -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.itemData.assetStatusPhysical">
+                                    <input type="text" class="form-control input-medium" ng-model="option.AssetStatusPhysical">
                                 </td>
                                 <!-- Variance -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.itemData.assetStatusVariance">
+                                    <input type="text" class="form-control input-medium" ng-model="option.AssetStatusVariance">
                                 </td>
                                 <!-- Remarks -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.itemData.assetStatusRemarks">
+                                    <input type="text" class="form-control input-medium" ng-model="option.AssetStatusRemarks">
                                 </td>
                                 
                                 
@@ -273,23 +279,23 @@
                             <!--For Warehouse Item Only -->  
                                 <!-- Warehouse -->
                                 <td ng-if="vm.selectItem === 'warehouse'">
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.warehouse">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Warehouse">
                                 </td>
                                 <!-- In-Whse Qty on Count Date -->
                                 <td ng-if="vm.selectItem === 'warehouse'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.itemData.inWhseQty">
+                                    <input type="text" class="form-control input-medium" ng-model="option.InWhseQty">
                                 </td>
                                 <!-- Counted Quantity -->
                                 <td ng-if="vm.selectItem === 'warehouse'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.itemData.countedQty">
+                                    <input type="text" class="form-control input-medium" ng-model="option.CountedQty">
                                 </td>
                                 <!-- Variance -->
                                 <td ng-if="vm.selectItem === 'warehouse'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.itemData.countedQtyVariance">
+                                    <input type="text" class="form-control input-medium" ng-model="option.CountedQtyVariance">
                                 </td>
                                 <!-- Remarks -->   
                                 <td ng-if="vm.selectItem === 'warehouse'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.itemData.countedQtyRemarks">
+                                    <input type="text" class="form-control input-medium" ng-model="option.CountedQtyRemarks">
                                 </td>
                             </tr>
                         </tbody>
@@ -322,9 +328,9 @@
                 <div class="col-md-12">
                     <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
                     <button type="button" class="btn btn-primary pull-right margin-left-5">Save</button>
-                    <label type="button" class="btn btn-info pull-right margin-left-5" for="table">Import</label>
+                    <label type="button" class="btn btn-info pull-right margin-left-5" for="table-input">Import</label>
                     <button type="button" class="btn btn-success pull-right margin-left-5" ng-click="vm.exportToExcel('picTable')">Export to Excel</button>
-                    <input type="file" class="hidden" id="table" name="table">
+                    <input type="file" class="hidden" id="table-input" name="table-input">
                 </div>
             </div>
         </form>
