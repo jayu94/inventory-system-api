@@ -10,7 +10,7 @@
 		])
 		.run(['$rootScope', '$state', 'userService', 'messageService', function run($rootScope, $state, userService, messageService) {
 
-			$rootScope.api = "type url of api here";
+			$rootScope.api = "http://192.168.0.107/csb/public/";
 
 			// uncomment if login is implemented
 

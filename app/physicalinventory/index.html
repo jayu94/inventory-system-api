@@ -29,17 +29,15 @@
                     <label for="picDate" class="col-sm-4 control-label">PIC Date:</label>
                     <div class="col-sm-4">
                         <div class="input-group">
-                            <input type="date" class="form-control" id="picDate" placeholder="mm/dd/yyyy" ng-model='vm.picDate'>
+                            <input type="text" class="form-control" id="picDate" placeholder="mm/dd/yyyy" ng-model='vm.picDate'>
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                         </div>
                     </div>
-                    <div class="col-sm-2">
-                        <label for="time" class="col-sm-4 control-label pull-right">Time:</label>
+                    <div class="col-sm-1">
+                        <label for="time" class="col-sm-4 control-label" style="text-align:right !important;">Time:&nbsp;</label>
                     </div>
-                    <div class="col-sm-2">
-                        <div class="input-group">
-                            <input type="time" class="form-control" id="time" ng-disabled="true" ng-model='vm.time'>
-                        </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="time" ng-disabled="true" ng-model='vm.time'>
                     </div>
                 </div>
                 <div class="form-group">
@@ -66,10 +64,10 @@
             </div>
 
             <div class="row">
-                <div class="form-group">
-                    <div class="col-md-4 col-md-offset-4">
-                        <label for="selectItem" class="control-label col-sm-4">Item class:</label>
-                        <div class="input-group">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="selectItem" class="control-label col-md-4">Item class:</label>
+                        <div class="col-md-8">
                             <select id="selectItem" ng-model="vm.selectItem" class="form-control">
                                 <option value="accountable" >Accountable Items</option>
                                 <option value="warehouse">Warehouse Items</option>
@@ -77,69 +75,71 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="col-md-6" ng-if="vm.selectItem === 'warehouse'">
-                        <div class="form-group">
-                            <label for="commodity" class="col-sm-4 control-label">Commodity Group:</label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="commodity">
-                                    <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="col-md-6" ng-if="vm.selectItem === 'warehouse'">
+                                <div class="form-group">
+                                    <label for="commodity" class="col-sm-4 control-label">Commodity Group:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="commodity">
+                                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-if="vm.selectItem === 'warehouse'">
+                                <div class="form-group">
+                                    <label for="warehouse" class="col-sm-4 control-label">Warehouse:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="warehouse">
+                                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-if="vm.selectItem === 'accountable'">
+                                <div class="form-group">
+                                    <label for="location" class="col-sm-4 control-label">Location:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="location">
+                                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-if="vm.selectItem === 'accountable'">
+                                <div class="form-group">
+                                    <label for="accountablePerson" class="col-sm-4 control-label">Accountable Person:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="accountablePerson">
+                                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-offset-6 col-md-6" ng-if="vm.selectItem === 'accountable'">
+                                <div class="form-group">
+                                    <label for="majorAssetCategory" class="col-sm-4 control-label">Major Asset Category:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="majorAssetCategory">
+                                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6" ng-if="vm.selectItem === 'warehouse'">
-                        <div class="form-group">
-                            <label for="warehouse" class="col-sm-4 control-label">Warehouse:</label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="warehouse">
-                                    <span class="input-group-addon"><i class="fa fa-list"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6" ng-if="vm.selectItem === 'accountable'">
-                        <div class="form-group">
-                            <label for="location" class="col-sm-4 control-label">Location:</label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="location">
-                                    <span class="input-group-addon"><i class="fa fa-list"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6" ng-if="vm.selectItem === 'accountable'">
-                        <div class="form-group">
-                            <label for="accountablePerson" class="col-sm-4 control-label">Accountable Person:</label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="accountablePerson">
-                                    <span class="input-group-addon"><i class="fa fa-list"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-offset-6 col-md-6" ng-if="vm.selectItem === 'accountable'">
-                        <div class="form-group">
-                            <label for="majorAssetCategory" class="col-sm-4 control-label">Major Asset Category:</label>
-                            <div class="col-sm-8">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="majorAssetCategory">
-                                    <span class="input-group-addon"><i class="fa fa-list"></i></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </di>
             </div>
 
             <div class="col-md-12">
-                <div class="table-responsive" style="overflow:auto;">
+                <div class="table-responsive" id="picTable">
                     <table class="table custom-table">
                         <thead>
                             <tr>
@@ -203,11 +203,11 @@
                                 </td>
                                 <!--Freeze -->
                                 <td>
-                                    <input type="checkbox" class="form-control input-small" ng-model="option.itemData.freeze"> 
+                                    <input type="checkbox" class="text-center" ng-model="option.itemData.freeze"> 
                                 </td>
                                 <!--Counted -->
                                 <td>
-                                    <input type="checkbox" class="form-control input-small" ng-disabled="true" ng-model="option.itemData.counted"> 
+                                    <input type="checkbox" class="text-center" ng-disabled="true" ng-model="option.itemData.counted"> 
                                 </td>
                                 <!--Counter -->
                                 <td>
@@ -322,9 +322,9 @@
                 <div class="col-md-12">
                     <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
                     <button type="button" class="btn btn-primary pull-right margin-left-5">Save</button>
-                    <button type="button" class="btn btn-info pull-right margin-left-5" >Import</button>
-                    <button type="button" class="btn btn-success pull-right margin-left-5">Export to Excel</button>
-                    
+                    <label type="button" class="btn btn-info pull-right margin-left-5" for="table">Import</label>
+                    <button type="button" class="btn btn-success pull-right margin-left-5" ng-click="vm.exportToExcel('picTable')">Export to Excel</button>
+                    <input type="file" class="hidden" id="table" name="table">
                 </div>
             </div>
         </form>

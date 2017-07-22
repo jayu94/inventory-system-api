@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', physicalInventoryController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', '$timeout', physicalInventoryController]
 
     angular.module('app').controller('physicalInventoryController', physicalInventoryController);
 
-    function physicalInventoryController($http, $scope, $state, $stateParams) {
+    function physicalInventoryController($http, $scope, $state, $stateParams, $timeout) {
         var vm = this;
 
         var grDataTable = {};
@@ -82,9 +82,23 @@
         //Deleting Row if there's already selected
         vm.deleteRow = function(){
 			if(vm.selected >= 0) {
-				vm.grTable.splice(vm.selected, 1);
-					vm.selected = null;
+				vm.grTablePIC.splice(vm.selected, 1);
+				vm.selected = null;
 			}
+        }
+
+		vm.exportToExcel=function(tableId){ // ex: '#my-table'
+
+			// var blob = new Blob([document.getElementById(tableId).innerHTML], {
+			// 		type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
+			// 	});
+			// saveAs(blob, "Report.xls");
+			
+
+            var exportHref=excelService.tableToExcel('#' + tableId,'physical_inventory_count');
+            $timeout(function(){
+				location.href=exportHref;
+			},100); // trigger download
         }
     }
 })();

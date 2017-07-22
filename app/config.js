@@ -28,7 +28,7 @@
 		//$mdThemingProvider.theme('default')
 		//.primaryPalette('pink')
 		//.accentPalette('red');
-			$httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+		$httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
 
 		cfpLoadingBarProvider.includeSpinner = false;
 		$httpProvider.interceptors.push('interceptor');

@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', goodReceiptController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', 'goodsReceiptService', goodReceiptController]
 
     angular.module('app').controller('goodReceiptController', goodReceiptController);
 
-    function goodReceiptController($http, $scope, $state, $stateParams) {
+    function goodReceiptController($http, $scope, $state, $stateParams, goodsReceiptService) {
         var vm = this;
         var grDataTable = {};
 
@@ -112,5 +112,17 @@
 				vm.rowCount++;
 			}
         }
+
+		vm.save = function(){
+			goodsReceiptService.post({
+				UserId: '00001',
+				GrStatusId: 1,
+				ReceivingDate: '07/22/2017',
+				Source: 'SOURCE'
+			}).then(function(response){
+				console.log(response);
+			})
+
+		}
     }
 })();
