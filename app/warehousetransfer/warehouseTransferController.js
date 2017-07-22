@@ -1,15 +1,24 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', warehouseTransferController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', 'warehouseTransferService', warehouseTransferController]
 
     angular.module('app').controller('warehouseTransferController', warehouseTransferController);
 
-    function warehouseTransferController($http, $scope, $state, $stateParams) {
+    function warehouseTransferController($http, $scope, $state, $stateParams, warehouseTransferService) {
         var vm = this;
+
+        vm.getItemList = function(){
+            warehouseTransferService.get().then(function(response){
+                vm.itemList = response.data;
+            },function(response){
+                console.log(response);
+            });
+        }
 
         vm.init = function(){
             vm.table = [];
+            vm.getItemList();
         }();
 
         vm.selectIndex = function(rowNo){
