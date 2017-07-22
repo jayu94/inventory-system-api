@@ -7,19 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class WarehouseItems extends Model
 {
 	public static function GetItemById($code){
-    	$t1 = '[dbo].[@WAREHOUSETRANSFER]';
-    	$t2 = '[dbo].[@WAREHOUSETRANSFERITEM]';
-        	 
-    	$results = DB::select("Select * from $t1 as a left join  t2 as b on b.WarehouseTransferID = a.ID Where b.ItemCode = ?", array($code));
+		$results = DB::table('@WAREHOUSETRANSFER')
+            ->innerJoin('@WAREHOUSETRANSFERITEM', '@WAREHOUSETRANSFERITEM.WarehouseTransferID', '=', '@WAREHOUSETRANSFER.WTNo')
+            ->where('@WAREHOUSETRANSFER.ItemCode',$code)
+            ->get();
 
          return $results;
 	}
 
 	public static function GetAllItems(){
-		
-		$t1 = '[dbo].[@WAREHOUSETRANSFER]';
-    	$t2 = '[dbo].[@WAREHOUSETRANSFERITEM]';
-        $results = DB::select("Select * from $t1 as a left join $t2 as b on b.WarehouseTransferID = a.ID");
+		$results = DB::table('@WAREHOUSETRANSFER')
+            ->leftJoin('@WAREHOUSETRANSFERITEM', '@WAREHOUSETRANSFERITEM.WarehouseTransferID', '=', '@WAREHOUSETRANSFER.WTNo')
+            ->get();
 
         return $results;
 	}
