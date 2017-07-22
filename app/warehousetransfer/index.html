@@ -22,9 +22,7 @@
                 <div class="form-group">
                     <label for="wtStatus" class="col-sm-4 control-label">WT Status:</label>
                     <div class="col-sm-8">
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="wtStatus" ng-disabled="true">
-                        </div>
+                        <input type="text" class="form-control" id="wtStatus" ng-disabled="true">
                     </div>
                 </div>
                 <div class="form-group">
@@ -46,7 +44,6 @@
                                 <th rowspan="2">Row&nbsp;#</th>
                                 <th rowspan="2">Item Code</th>
                                 <th rowspan="2">Item Name</th>
-                                <th rowspan="2">Specification</th>
                                 <th rowspan="2">Uom</th>
                                 <th rowspan="2">Unit Price</th>
                                 <th colspan="4" class="th-from">FROM</th>
@@ -71,46 +68,48 @@
                                     <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ $index + 1 }}
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <div class="input-group">
+                                        <select class="form-control input-medium" ng-model="option.itemData" ng-options="option.ItemCode for option in vm.itemList track by option.ItemCode">
+                                             <option value="" disabled selected>--select--</option>
+                                        </select>
+                                        <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                    </div>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.ItemName">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.Uom">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium text-right" ng-disabled="true" ng-model="option.itemData.Price"> 
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true"> 
+                                    <input type="number" class="form-control input-medium text-center" ng-disabled="true" ng-model="option.itemData.Qty">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                     <input type="number" class="form-control input-medium text-center" ng-disabled="true" ng-model="option.itemData.QtyNeeded">
                                 </td>
                                 <td>
-                                     <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.WarehouseFrom">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.CostCenterFrom">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true">
+                                    <input type="number" class="form-control input-medium text-center" ng-model="option.itemData.ToQty">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium">
+                                    <input type="number" class="form-control input-medium text-center" ng-model="item.ToQtyRequested">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium">
+                                    <input type="text" class="form-control input-medium" ng-model="item.ToWarehouse">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium">
+                                    <input type="text" class="form-control input-medium" ng-model="item.ToCostCenter">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium">
-                                </td>
-                                <td>
-                                    <input type="text" class="form-control input-medium">
+                                    <input type="text" class="form-control input-medium" ng-model="item.Reasons">
                                 </td>
                             </tr>
                         </tbody>
