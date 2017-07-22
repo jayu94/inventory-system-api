@@ -1,24 +1,15 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', 'warehouseTransferService', warehouseTransferController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', 'warehouseTransferService', 'itemService', warehouseTransferController]
 
     angular.module('app').controller('warehouseTransferController', warehouseTransferController);
 
-    function warehouseTransferController($http, $scope, $state, $stateParams, warehouseTransferService) {
+    function warehouseTransferController($http, $scope, $state, $stateParams, warehouseTransferService, itemService) {
         var vm = this;
-
-        vm.getItemList = function(){
-            warehouseTransferService.get().then(function(response){
-                vm.itemList = response.data;
-            },function(response){
-                console.log(response);
-            });
-        }
 
         vm.init = function(){
             vm.table = [];
-            vm.getItemList();
         }();
 
         vm.selectIndex = function(rowNo){
@@ -41,6 +32,25 @@
                 angular.merge(newRow, vm.table[vm.selected]);
                 vm.table.push(newRow);
             }
+        }
+
+        vm.submit = function(status){
+            warehouseTransferService.post({
+                UserId: '00001',
+                TransferDate: null,
+                Status: status,
+                Items: vm.table
+            }).then(function(response){
+                console.log(response);
+            })
+        }
+
+        vm.getItems = function(query){
+            return warehouseTransferService.get(query, 10);
+        }
+
+        vm.itemSelected = function(line, item){
+            angular.merge(line, item);
         }
     }
 })();

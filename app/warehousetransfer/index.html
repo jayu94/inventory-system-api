@@ -63,53 +63,59 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in vm.table track by $index" ng-class="{ 'selected': vm.selected == $index }">
+                            <tr ng-repeat="option in vm.table track by $index" ng-class="{ 'selected': vm.selected == $index }">
                                 <td class="text-center row-item" ng-click="vm.selectIndex($index)">
                                     <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ $index + 1 }}
                                 </td>
                                 <td>
                                     <div class="input-group">
-                                        <select class="form-control input-medium" ng-model="option.itemData" ng-options="option.ItemCode for option in vm.itemList track by option.ItemCode">
-                                             <option value="" disabled selected>--select--</option>
-                                        </select>
-                                        <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        <input type="text" ng-model="asyncSelected" 
+                                            placeholder="Search Item" 
+                                            uib-typeahead="item as item.ItemCode for item in vm.getItems($viewValue)"
+                                            typeahead-append-to-body="true"
+                                            typeahead-editable="false"
+                                            typeahead-on-select="vm.itemSelected(option, $item)"
+                                            typeahead-template-url="app/shared/templates/item-typeahead.html"
+                                            typeahead-loading="option.loading"
+                                            class="form-control input-medium">
+                                        <span class="input-group-addon"><i class="fa" ng-class="{ 'fa-list': !option.loading, 'fa-refresh fa-spin': option.loading }"></i></span>
                                     </div>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.ItemName">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.ItemName">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.Uom">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Uom">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium text-right" ng-disabled="true" ng-model="option.itemData.Price"> 
+                                    <input type="text" class="form-control input-medium text-right" ng-disabled="true" ng-model="option.Price"> 
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-medium text-center" ng-disabled="true" ng-model="option.itemData.Qty">
+                                    <input type="text" class="form-control input-medium text-center" ng-disabled="true" ng-model="option.Qty">
                                 </td>
                                 <td>
-                                     <input type="number" class="form-control input-medium text-center" ng-disabled="true" ng-model="option.itemData.QtyNeeded">
+                                     <input type="text" string-to-number class="form-control input-medium text-center" ng-disabled="true" ng-model="option.QtyNeeded">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.WarehouseFrom">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.WarehouseFrom">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.itemData.CostCenterFrom">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.CostCenterFrom">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-medium text-center" ng-model="option.itemData.ToQty">
+                                    <input type="number" class="form-control input-medium text-center" ng-model="option.ToQty">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-medium text-center" ng-model="item.ToQtyRequested">
+                                    <input type="number" string-to-number class="form-control input-medium text-center" ng-model="option.ToQtyRequested">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-model="item.ToWarehouse">
+                                    <input type="text" class="form-control input-medium" ng-model="option.ToWarehouse">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-model="item.ToCostCenter">
+                                    <input type="text" class="form-control input-medium" ng-model="option.ToCostCenter">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-model="item.Reasons">
+                                    <input type="text" class="form-control input-medium" ng-model="option.Reasons">
                                 </td>
                             </tr>
                         </tbody>
@@ -141,8 +147,8 @@
                 </div>
                 <h4>&nbsp;</h4>
                <div class="col-md-12">
-                    <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
-                    <button type="button" class="btn btn-primary pull-right margin-left-30">Save</button>
+                    <button type="button" class="btn btn-default pull-right margin-left-5" ng-click="vm.submit(2)">Submit</button>
+                    <button type="button" class="btn btn-primary pull-right margin-left-30" ng-click="vm.submit(1)">Save</button>
                     <button type="button" class="btn btn-success pull-right">Copy From &and;</button>
                 </div>
             </div>
