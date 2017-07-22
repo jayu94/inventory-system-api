@@ -84,27 +84,27 @@
 
 	        vm.grTable.push(row2);
 	        vm.rowCount++; //Sample number of count copied from...
-        }
+        };
 
         //Adding Row function
         vm.addRow = function(){
         	var itemData = vm.itemList[0]; 
 	        vm.grTable.push({ itemData: itemData, RowNo: vm.rowCount });
 	        vm.rowCount++; //incrementing row count...
-        }
+        };
 
         //Selecting Rows by clicking Row Number
         vm.selectIndex = function(rowNo){
         	vm.selected = rowNo;
-        }
+        };
 
         //Deleting Row if there's already selected
         vm.deleteRow = function(){
 			if(vm.selected >= 0) {
 				vm.grTable.splice(vm.selected, 1);
-					vm.selected = null;
-				}
-	        }
+				vm.selected = null;
+			}
+		};
 
         //Duplicating Row if there's already selected
         vm.duplicateRow = function(){
@@ -115,27 +115,33 @@
 				vm.grTable.push(newRow);
 				vm.rowCount++;
 			}
-        }
+        };
 
 		vm.getItems = function(query){
 			return itemService.get(query, 10);
-		}
+		};
 
 		vm.itemSelected = function(line, item){
 			angular.merge(line, item);
-		}
+		};
 
 		vm.save = function(){
-			goodsReceiptService.post({
+			var data = {
 				UserId: '00001',
 				GrStatusId: 1,
 				ReceivingDate: '07/22/2017',
 				Source: 'SOURCE',
-				items: vm.grTable,
-			}).then(function(response){
-				console.log(response);
-			})
+				Items: _.map(vm.grTable, function(x){
+					var item = {};
+					angular.merge(item, x);
+					delete item.itemData;
+					return item;
+				}),
+			};
 
-		}
+			goodsReceiptService.post(data).then(function(response){
+				console.log(response);
+			});
+		};
     }
 })();
