@@ -91,7 +91,7 @@
                                     <input type="text" class="form-control input-medium text-right" ng-disabled="true" ng-model="option.Quantity">
                                 </td>
                                 <td ng-init="option.Quantity = (option.Quantity || '')">
-                                    <input type="number" class="form-control input-medium text-center" ng-disabled="false" ng-model="option.Quantity">
+                                    <input type="number" string-to-number class="form-control input-medium text-center" ng-disabled="false" ng-model="option.Quantity">
                                 </td>
                                 <td ng-init="option.PlaceOfDelivery = (option.PlaceOfDelivery || '')">
                                    <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.PlaceOfDelivery">

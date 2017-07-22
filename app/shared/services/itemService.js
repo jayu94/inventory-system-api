@@ -20,7 +20,7 @@
                     Specification: 'Item-0001-Specification',
                     UoM: 'Weight',
                     UnitPrice: '100.00',
-                    Quantity: 50,
+                    Quantity: "50",
                     Warranty: 'WARR1'
                 },
                 {
@@ -29,7 +29,7 @@
                     Specification: 'Item-0002-Specification',
                     UoM: 'Kilogram',
                     UnitPrice: '1200.00',
-                    Quantity: 25,
+                    Quantity: "25",
                     Warranty: 'WARR1'
                 },
                 {
@@ -38,7 +38,7 @@
                     Specification: 'Item-0003-Specification',
                     UoM: 'Weight',
                     UnitPrice: '1700.00',
-                    Quantity: 5,
+                    Quantity: "5",
                     Warranty: 'WARR1'
                 },
                 {
@@ -47,7 +47,7 @@
                     Specification: 'Item-Name4-Specification',
                     UoM: 'Weight',
                     UnitPrice: '12200.00',
-                    Quantity: 25,
+                    Quantity: "25",
                     Warranty: 'WARR1'
                 }
             ];
@@ -62,7 +62,8 @@
             }, 500);
 
             return deferred.promise;
-            //return $http.get($rootScope.api + '/', { params: { query: query, limit: limit }});
+            // return $http.get($rootScope.api + 'items', { params: { query: query, limit: limit }})
+            // .then(function(response){ console.log(response); return response.data; });
         }
 
         return service;

@@ -6,11 +6,13 @@
 			'ui.bootstrap',
 			'ngTouch', 
 			'ngAnimate', 
-			'ngSanitize'
+			'ngSanitize',
+			'angularFileUpload'
 		])
 		.run(['$rootScope', '$state', 'userService', 'messageService', function run($rootScope, $state, userService, messageService) {
 
 			$rootScope.api = "http://192.168.0.107/csb/public/";
+			// $rootScope.api = "http://192.168.0.108:8080/inventory-api/public/";
 
 			// uncomment if login is implemented
 

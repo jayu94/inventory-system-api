@@ -3,14 +3,15 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', '$timeout', 'itemService', physicalInventoryController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', '$timeout', 'itemService', 'FileUploader', physicalInventoryController]
 
     angular.module('app').controller('physicalInventoryController', physicalInventoryController);
 
-    function physicalInventoryController($http, $scope, $state, $stateParams, $timeout, itemService) {
+    function physicalInventoryController($http, $scope, $state, $stateParams, $timeout, itemService, FileUploader) {
         var vm = this;
 
 		vm.init = function(){
+			
 			var grDataTable = {};
 			vm.rowCount = 1;
 			vm.grTablePIC = [];
@@ -19,6 +20,24 @@
 			vm.user = 'kwingkwingko';
 			vm.department = 'Green Department';
 			vm.picNo = '123';
+			vm.uploader = new FileUploader();
+
+			vm.validFields = [
+				"ItemCode",
+				"ItemName",
+				"UoM",
+				"Freeze",
+				"Counted",
+				"Checker",
+				"Validator",
+				"Specification",
+				"SerialNo",
+				"PropertyTagCode",
+				"LocationOnRecord",
+				"LocationPhysical",
+				"Variance",
+				"Remarks",
+			];
 
 			vm.itemList = [
 				{
@@ -68,6 +87,30 @@
 			];
 		}();
 
+		vm.uploader.onAfterAddingFile = function(fileItem) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				var data = e.target.result;
+				var wb = XLSX.read(data, {type: 'binary'});
+				var jsonResult = to_json(wb);
+				var result = JSON.stringify(to_json(wb), 2, 2);
+				for(var i in jsonResult){
+					var sheet = jsonResult[i];
+					_.forEach(sheet, function(item) {
+						var newItem = {};
+						_.forEach(vm.validFields, function(property){
+							newItem[property] = item[property];
+						});
+						$timeout(function(){
+							vm.grTablePIC.push(newItem);
+							console.log(newItem);
+						});
+					});
+				}
+			};
+			reader.readAsBinaryString(fileItem._file);
+        };
+
         //Adding Row function
         vm.addRow = function(){
         	var itemData = vm.itemList[0]; 
@@ -86,28 +129,25 @@
 				vm.grTablePIC.splice(vm.selected, 1);
 				vm.selected = null;
 			}
-        }
+        };
 
 		vm.getItems = function(query){
 			return itemService.get(query, 10);
-		}
+		};
 
 		vm.itemSelected = function(line, item){
 			angular.merge(line, item);
+		};
+
+		function to_json(workbook) {
+			var result = {};
+			workbook.SheetNames.forEach(function(sheetName) {
+				var roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+				if(roa.length > 0){
+					result[sheetName] = roa;
+				}
+			});
+			return result;
 		}
-
-		vm.exportToExcel=function(tableId){ // ex: '#my-table'
-
-			// var blob = new Blob([document.getElementById(tableId).innerHTML], {
-			// 		type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8"
-			// 	});
-			// saveAs(blob, "Report.xls");
-			
-
-            var exportHref=excelService.tableToExcel('#' + tableId,'physical_inventory_count');
-            $timeout(function(){
-				location.href=exportHref;
-			},100); // trigger download
-        }
     }
 })();

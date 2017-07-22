@@ -10,11 +10,16 @@
         var url = $rootScope.api + 'goodsreceipt'
 
         var service = {
+            getByID: getByID,
             post: post
         };
 
         function get() {
             return $http.get($rootScope.api + '/');
+        }
+
+        function getByID(id) {
+            return $http.get(url + '/retrieve/' + id);
         }
 
         function post(gr){

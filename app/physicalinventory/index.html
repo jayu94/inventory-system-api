@@ -185,10 +185,10 @@
                                 <td class="text-center row-item" ng-click="vm.selectIndex($index)">
                                     <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ option.RowNo }}</td>
                                 <!--Item No./Asset No. -->
-                                <td>    
+                                <td>
                                     <div class="input-group">
-                                        <input type="text" ng-model="asyncSelected" 
-                                            placeholder="Search Item" 
+                                        <input type="text" ng-model="asyncSelected"
+                                            placeholder="Search Item"
                                             uib-typeahead="item as item.ItemCode for item in vm.getItems($viewValue)"
                                             typeahead-append-to-body="true"
                                             typeahead-editable="false"
@@ -209,11 +209,11 @@
                                 </td>
                                 <!--Freeze -->
                                 <td>
-                                    <input type="checkbox" class="text-center" ng-model="option.Freeze"> 
+                                    <input type="checkbox" class="text-center" ng-model="option.Freeze">
                                 </td>
                                 <!--Counted -->
                                 <td>
-                                    <input type="checkbox" class="text-center" ng-disabled="true" ng-model="option.Counted"> 
+                                    <input type="checkbox" class="text-center" ng-disabled="true" ng-model="option.Counted">
                                 </td>
                                 <!--Counter -->
                                 <td>
@@ -243,11 +243,11 @@
                                 </td>
                                 <!-- Location (On Record) -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.LocOnRecord">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.LocationOnRecord">
                                 </td>
                                 <!-- Location (Physical) -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.LocPhysical">
+                                    <input type="text" class="form-control input-medium" ng-model="option.LocationPhysical">
                                 </td>
                                 <!-- Variance -->
                                 <td ng-if="vm.selectItem === 'accountable'">
@@ -273,10 +273,10 @@
                                 <td ng-if="vm.selectItem === 'accountable'">
                                     <input type="text" class="form-control input-medium" ng-model="option.AssetStatusRemarks">
                                 </td>
-                                
-                                
 
-                            <!--For Warehouse Item Only -->  
+
+
+                            <!--For Warehouse Item Only -->
                                 <!-- Warehouse -->
                                 <td ng-if="vm.selectItem === 'warehouse'">
                                     <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Warehouse">
@@ -293,7 +293,7 @@
                                 <td ng-if="vm.selectItem === 'warehouse'">
                                     <input type="text" class="form-control input-medium" ng-model="option.CountedQtyVariance">
                                 </td>
-                                <!-- Remarks -->   
+                                <!-- Remarks -->
                                 <td ng-if="vm.selectItem === 'warehouse'">
                                     <input type="text" class="form-control input-medium" ng-model="option.CountedQtyRemarks">
                                 </td>
@@ -330,7 +330,7 @@
                     <button type="button" class="btn btn-primary pull-right margin-left-5">Save</button>
                     <label type="button" class="btn btn-info pull-right margin-left-5" for="table-input">Import</label>
                     <button type="button" class="btn btn-success pull-right margin-left-5" ng-click="vm.exportToExcel('picTable')">Export to Excel</button>
-                    <input type="file" class="hidden" id="table-input" name="table-input">
+                    <input type="file" class="hidden" id="table-input" name="table-input" nv-file-select uploader="vm.uploader">
                 </div>
             </div>
         </form>
