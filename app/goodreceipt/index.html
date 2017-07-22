@@ -57,6 +57,7 @@
                                 <th>Place of Delivery</th>
                                 <th>Asset No.</th>
                                 <th>Serial No.</th>
+                                <th>Warranty</th>
                             </tr>
                         </thead>
                         <tbody id="grtBody">
@@ -77,31 +78,31 @@
                                         <span class="input-group-addon"><i class="fa" ng-class="{ 'fa-list': !option.loading, 'fa-refresh fa-spin': option.loading }"></i></span>
                                     </div>
                                 </td>
-                                <td>
+                                <td ng-init="option.ItemName = (option.ItemName || '')">
                                     <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.ItemName">
                                 </td>
-                                <td>
+                                <td ng-init="option.Specification = (option.Specification || '')">
                                     <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Specification">
                                 </td>
-                                <td>
+                                <td ng-init="option.UoM = (option.UoM || '')">
                                     <input type="text" class="form-control input-medium text-center" ng-disabled="true" ng-model="option.UoM">
                                 </td>
-                                <td>
-                                    <input type="text" class="form-control input-medium text-right" ng-disabled="true" ng-model="option.UnitPrice">
+                                <td ng-init="option.Quantity = (option.Quantity || '')">
+                                    <input type="text" class="form-control input-medium text-right" ng-disabled="true" ng-model="option.Quantity">
                                 </td>
-                                <td>
+                                <td ng-init="option.Quantity = (option.Quantity || '')">
                                     <input type="number" class="form-control input-medium text-center" ng-disabled="false" ng-model="option.Quantity">
                                 </td>
-                                <td>
+                                <td ng-init="option.PlaceOfDelivery = (option.PlaceOfDelivery || '')">
                                    <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.PlaceOfDelivery">
                                 </td>
-                                <td>
+                                <td ng-init="option.AssetNo = (option.AssetNo || '')">
                                     <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.AssetNo">
                                 </td>
-                                <td>
+                                <td ng-init="option.SerialNo = (option.SerialNo || '')">
                                     <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.SerialNo">
                                 </td>
-                                 <td>
+                                 <td ng-init="option.Warranty = (option.Warranty || '')">
                                     <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.Warranty">
                                 </td>
                             </tr>
