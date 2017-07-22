@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', 'goodsReceiptService', goodReceiptController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', 'goodsReceiptService', 'itemService', goodReceiptController]
 
     angular.module('app').controller('goodReceiptController', goodReceiptController);
 
-    function goodReceiptController($http, $scope, $state, $stateParams, goodsReceiptService) {
+    function goodReceiptController($http, $scope, $state, $stateParams, goodsReceiptService, itemService) {
         var vm = this;
         var grDataTable = {};
 
@@ -23,38 +23,46 @@
         //Dummy Item-List
         vm.itemList = [
 			{
-				itemCode: 'Item-0001',
-				itemName: 'Item-Name1',
-				specification: 'Item-0001-Specification',
-				uom: 'Weight',
-				unitPrice: '100.00',
-				quantity: 50
+				ItemCode: 'Item-0001',
+				ItemName: 'Item-Name1',
+				Specification: 'Item-0001-Specification',
+				UoM: 'Weight',
+				UnitPrice: '100.00',
+				Quantity: 50,
+				Warranty: 'WARR1'
 			},
 			{
-				itemCode: 'Item-0002',
-				itemName: 'Item-Name2',
-				specification: 'Item-0002-Specification',
-				uom: 'Kilogram',
-				unitPrice: '1200.00',
-				quantity: 25
+				ItemCode: 'Item-0002',
+				ItemName: 'Item-Name2',
+				Specification: 'Item-0002-Specification',
+				UoM: 'Kilogram',
+				UnitPrice: '1200.00',
+				Quantity: 25,
+				Warranty: 'WARR1'
 			},
 			{
-				itemCode: 'Item-0003',
-				itemName: 'Item-Name3',
-				specification: 'Item-0003-Specification',
-				uom: 'Weight',
-				unitPrice: '1700.00',
-				quantity: 5
+				ItemCode: 'Item-0003',
+				ItemName: 'Item-Name3',
+				Specification: 'Item-0003-Specification',
+				UoM: 'Weight',
+				UnitPrice: '1700.00',
+				Quantity: 5,
+				Warranty: 'WARR1'
 			},
 			{
-				itemCode: 'Item-0004',
-				itemName: 'Item-Name4',
-				specification: 'Item-Name4-Specification',
-				uom: 'Weight',
-				unitPrice: '12200.00',
-				quantity: 25
+				ItemCode: 'Item-0004',
+				ItemName: 'Item-Name4',
+				Specification: 'Item-Name4-Specification',
+				UoM: 'Weight',
+				UnitPrice: '12200.00',
+				Quantity: 25,
+				Warranty: 'WARR1'
 			}
 		];
+
+		vm.getItems = function(query){
+			return itemService.get(query, 10);
+		}
 
         //Copy From function using Dummy Data
         vm.copyFrom = function() {
@@ -113,12 +121,18 @@
 			}
         }
 
+		vm.itemSelected = function(line, item){
+			angular.merge(line, item);
+			console.log(item);
+		}
+
 		vm.save = function(){
 			goodsReceiptService.post({
 				UserId: '00001',
 				GrStatusId: 1,
 				ReceivingDate: '07/22/2017',
-				Source: 'SOURCE'
+				Source: 'SOURCE',
+				items: vm.grTable,
 			}).then(function(response){
 				console.log(response);
 			})
