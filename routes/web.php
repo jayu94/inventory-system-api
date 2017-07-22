@@ -22,3 +22,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/goodsreceipt/list', 'GoodsReceiptController@index');
 Route::get('/goodsreceipt/create', 'GoodsReceiptController@store');
 Route::get('/goodsreceipt/delete/{id}', 'GoodsReceiptController@destroy');
+
+
+Route::get('/items', 'MaterialMasterController@index');
+Route::get('/items/{code}', 'MaterialMasterController@index');
+Route::post('/warehouse/submit', 'WarehouseController@submit');
+Route::get('/warehouse', 'WarehouseController@index');
+Route::get('/warehouse/{code}', 'WarehouseController@index');
+
