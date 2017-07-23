@@ -50,25 +50,28 @@
         }();
 
         vm.selectIndex = function(rowNo){
-            vm.selected = rowNo;
-        }
+            if(rowNo == vm.selected)
+				vm.selected = null;
+			else
+        		vm.selected = rowNo;
+        };
 
         vm.addRow = function(){
             vm.table.push({});
-        }
+        };
 
         vm.deleteRow = function(){
             if(vm.selected >= 0){
                 vm.table.splice(vm.selected, 1);
             }
-        }
+        };
 
         vm.getItems = function(query){
 			return itemService.get(query, 10);
-		}
+		};
 
 		vm.itemSelected = function(line, item){
 			angular.merge(line, item);
-		}
+		};
     }
 })();

@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', 'issuanceService', 'goodsReceiptService', issuanceController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', 'issuanceService', 'goodsReceiptService', '$uibModal', issuanceController]
 
     angular.module('app').controller('issuanceController', issuanceController);
 
-    function issuanceController($http, $scope, $state, $stateParams, issuanceService, goodsReceiptService) {
+    function issuanceController($http, $scope, $state, $stateParams, issuanceService, goodsReceiptService, $uibModal) {
         var vm = this;
 
         vm.init = function(){
@@ -22,8 +22,24 @@
                 });
         }();
 
+        vm.copyFrom = function (){
+            $scope.modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: './app/issuance/copy-from-modal.html',
+                size: 'md',
+                scope: $scope,
+                backdrop: 'static'
+            });
+
+            $scope.ok = function(){ $scope.modalInstance.dismiss(); };
+            $scope.cancel = function(){ $scope.modalInstance.dismiss(); };
+        };
+
         vm.selectIndex = function(rowNo){
-            vm.selected = rowNo;
+            if(rowNo == vm.selected)
+				vm.selected = null;
+			else
+        		vm.selected = rowNo;
         };
 
         vm.addRow = function(){

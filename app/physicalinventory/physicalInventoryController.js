@@ -11,7 +11,6 @@
         var vm = this;
 
 		vm.init = function(){
-			
 			var grDataTable = {};
 			vm.rowCount = 1;
 			vm.grTablePIC = [];
@@ -21,10 +20,55 @@
 			vm.department = 'Green Department';
 			vm.picNo = '123';
 			vm.uploader = new FileUploader();
+			
+			vm.accountableItemHeaders = {
+				ItemCode: 'ItemCode',
+				ItemDescription: 'ItemDescription',
+				UoM: 'UoM',
+				Freeze: 'Freeze',
+				Counted: 'Counted',
+				Counter: 'Counter',
+				Checker: 'Checker',
+				Validator: 'Validator',
+				Variance: 'Variance',
+				Remarks: 'Remarks',
+				Specification: 'Specification',
+				SerialNo: 'SerialNo',
+				PropertyCode: 'PropertyTagCode',
+				LocationOnRecord: 'LocationOnRecord',
+				LocationPhysical: 'LocationPhysical',
+				AssetStatusVariance: 'AssetStatusVariance',
+				AssetStatusRemarks: 'AssetStatusRemarks',
+			};
 
-			vm.validFields = [
+			vm.warehouseItemHeaders = {
+				ItemCode: 'ItemCode',
+				ItemDescription: 'ItemDescription',
+				UoM: 'UoM',
+				Freeze: 'Freeze',
+				Counted: 'Counted',
+				Counter: 'Counter',
+				Checker: 'Checker',
+				Validator: 'Validator',
+				Variance: 'Variance',
+				Remarks: 'Remarks',
+				AssetStatusOnRecord: 'AssetStatusOnRecord',
+				AssetStatusPhysical: 'AssetStatusPhysical',
+				Warehouse: 'Warehouse',
+				QtyOnCountDate: 'QtyOnCountDate',
+				CountedQuantity: 'CountedQuantity',
+				QuantityVariance: 'QuantityVariance',
+				QuantityRemarks: 'QuantityRemarks'
+			};
+		}();
+
+		// import event handler
+		vm.uploader.onAfterAddingFile = function(fileItem) {
+
+			var validFields = [
 				"ItemCode",
 				"ItemName",
+				"ItemDescription",
 				"UoM",
 				"Freeze",
 				"Counted",
@@ -32,62 +76,13 @@
 				"Validator",
 				"Specification",
 				"SerialNo",
-				"PropertyTagCode",
+				"PropertyCode",
 				"LocationOnRecord",
 				"LocationPhysical",
 				"Variance",
 				"Remarks",
 			];
 
-			vm.itemList = [
-				{
-					itemNo: '0001',
-					description: '0001-desc',
-					uom: 'pc',
-					freeze: true,
-					counted: false,
-					counter: 'Counter 1',
-					checker: 'checker 1',
-					validator: 'validator 1',
-					specification: 'specified'
-				},
-				{
-					itemNo: '0002',
-					description: '0002-desc',
-					uom: 'pc',
-					freeze: true,
-					counted: false,
-					counter: 'Counter 2',
-					checker: 'checker 2',
-					validator: 'validator 2',
-					specification: 'specified'
-				},
-				{
-					itemNo: '0003',
-					description: '0003-desc',
-					uom: 'pc',
-					freeze: false,
-					counted: false,
-					counter: 'Counter 3',
-					checker: 'checker 3',
-					validator: 'validator 3',
-					warehouse: 'warehouse3'
-				},
-				{
-					itemNo: '0004',
-					description: '0004-desc',
-					uom: 'pc',
-					freeze: true,
-					counted: true,
-					counter: 'Counter 4',
-					checker: 'checker 4',
-					validator: 'validator 4',
-					warehouse: 'warehouse4'
-				}
-			];
-		}();
-
-		vm.uploader.onAfterAddingFile = function(fileItem) {
 			var reader = new FileReader();
 			reader.onload = function(e) {
 				var data = e.target.result;
@@ -98,7 +93,7 @@
 					var sheet = jsonResult[i];
 					_.forEach(sheet, function(item) {
 						var newItem = {};
-						_.forEach(vm.validFields, function(property){
+						_.forEach(validFields, function(property){
 							newItem[property] = item[property];
 						});
 						$timeout(function(){
@@ -113,15 +108,17 @@
 
         //Adding Row function
         vm.addRow = function(){
-        	var itemData = vm.itemList[0]; 
-	        vm.grTablePIC.push({ itemData: itemData, RowNo: vm.rowCount });
+	        vm.grTablePIC.push({ RowNo: vm.rowCount });
 	        vm.rowCount++; //incrementing row count...
-        }
+        };
 
         //Selecting Rows by clicking Row Number
         vm.selectIndex = function(rowNo){
-        	vm.selected = rowNo;
-        }
+			if(rowNo == vm.selected)
+				vm.selected = null;
+			else
+        		vm.selected = rowNo;
+        };
 
         //Deleting Row if there's already selected
         vm.deleteRow = function(){

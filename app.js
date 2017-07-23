@@ -7,7 +7,8 @@
 			'ngTouch', 
 			'ngAnimate', 
 			'ngSanitize',
-			'angularFileUpload'
+			'angularFileUpload',
+			'ngJsonExportExcel'
 		])
 		.run(['$rootScope', '$state', 'userService', 'messageService', function run($rootScope, $state, userService, messageService) {
 

@@ -95,7 +95,10 @@
 
         //Selecting Rows by clicking Row Number
         vm.selectIndex = function(rowNo){
-        	vm.selected = rowNo;
+        	if(rowNo == vm.selected)
+				vm.selected = null;
+			else
+        		vm.selected = rowNo;
         };
 
         //Deleting Row if there's already selected

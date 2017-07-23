@@ -68,7 +68,7 @@
                     <div class="form-group">
                         <label for="selectItem" class="control-label col-md-4">Item class:</label>
                         <div class="col-md-8">
-                            <select id="selectItem" ng-model="vm.selectItem" class="form-control">
+                            <select id="selectItem" ng-model="vm.selectItem" class="form-control" ng-change="vm.setHeaders()">
                                 <option value="accountable" >Accountable Items</option>
                                 <option value="warehouse">Warehouse Items</option>
                             </select>
@@ -178,8 +178,6 @@
                                 <th ng-if="vm.selectItem === 'warehouse'">Remarks</th>
                             </tr>
                         </thead>
-
-
                         <tbody id="grtBody">
                             <tr ng-repeat="option in vm.grTablePIC track by $index" ng-class="{ 'selected': vm.selected == $index }">
                                 <td class="text-center row-item" ng-click="vm.selectIndex($index)">
@@ -201,7 +199,7 @@
                                 </td>
                                 <!--Item Description/Asset Description -->
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Description">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.ItemDescription">
                                 </td>
                                 <!--UoM -->
                                 <td>
@@ -239,7 +237,7 @@
                                 </td>
                                 <!-- Property Tag Code -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.PropertyTagCode">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.PropertyCode">
                                 </td>
                                 <!-- Location (On Record) -->
                                 <td ng-if="vm.selectItem === 'accountable'">
@@ -251,11 +249,11 @@
                                 </td>
                                 <!-- Variance -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.LocVariance">
+                                    <input type="text" class="form-control input-medium" ng-model="option.Variance">
                                 </td>
                                 <!-- Remarks -->
                                 <td ng-if="vm.selectItem === 'accountable'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.LocRemarks">
+                                    <input type="text" class="form-control input-medium" ng-model="option.Remarks">
                                 </td>
                                 <!-- Asset Status (On Record) -->
                                 <td ng-if="vm.selectItem === 'accountable'">
@@ -275,7 +273,6 @@
                                 </td>
 
 
-
                             <!--For Warehouse Item Only -->
                                 <!-- Warehouse -->
                                 <td ng-if="vm.selectItem === 'warehouse'">
@@ -283,19 +280,19 @@
                                 </td>
                                 <!-- In-Whse Qty on Count Date -->
                                 <td ng-if="vm.selectItem === 'warehouse'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.InWhseQty">
+                                    <input type="text" class="form-control input-medium" ng-model="option.QtyOnCountDate">
                                 </td>
                                 <!-- Counted Quantity -->
                                 <td ng-if="vm.selectItem === 'warehouse'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.CountedQty">
+                                    <input type="text" class="form-control input-medium" ng-model="option.CountedQuantity">
                                 </td>
                                 <!-- Variance -->
                                 <td ng-if="vm.selectItem === 'warehouse'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.CountedQtyVariance">
+                                    <input type="text" class="form-control input-medium" ng-model="option.QuantityVariance">
                                 </td>
                                 <!-- Remarks -->
                                 <td ng-if="vm.selectItem === 'warehouse'">
-                                    <input type="text" class="form-control input-medium" ng-model="option.CountedQtyRemarks">
+                                    <input type="text" class="form-control input-medium" ng-model="option.QuantityRemarks">
                                 </td>
                             </tr>
                         </tbody>
@@ -329,7 +326,8 @@
                     <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
                     <button type="button" class="btn btn-primary pull-right margin-left-5">Save</button>
                     <label type="button" class="btn btn-info pull-right margin-left-5" for="table-input">Import</label>
-                    <button type="button" class="btn btn-success pull-right margin-left-5" ng-click="vm.exportToExcel('picTable')">Export to Excel</button>
+                    <button type="button" class="btn btn-success pull-right margin-left-5" ng-if="vm.selectItem == 'accountable'" ng-disabled="!vm.selectItem" ng-json-export-excel data="vm.grTablePIC" separator="," report-fields="vm.accountableItemHeaders" filename="'report'">Export to Excel</button>
+                    <button type="button" class="btn btn-success pull-right margin-left-5" ng-if="vm.selectItem == 'warehouse'" ng-disabled="!vm.selectItem" ng-json-export-excel data="vm.grTablePIC" separator="," report-fields="vm.warehouseItemHeaders" filename="'report'">Export to Excel</button>
                     <input type="file" class="hidden" id="table-input" name="table-input" nv-file-select uploader="vm.uploader">
                 </div>
             </div>

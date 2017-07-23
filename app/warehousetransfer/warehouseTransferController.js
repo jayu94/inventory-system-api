@@ -22,7 +22,10 @@
         }();
 
         vm.selectIndex = function(rowNo){
-            vm.selected = rowNo;
+            if(rowNo == vm.selected)
+				vm.selected = null;
+			else
+        		vm.selected = rowNo;
         }
 
         vm.addRow = function(){
