@@ -33,6 +33,13 @@ Route::get('/warehouse/', 'WarehouseController@index');
 Route::get('/warehouse/{code}', 'WarehouseController@index');
 Route::get('/turnoverrequest/{code}', 'TurnoverRequestController@index');
 Route::get('/turnoverrequest/', 'TurnoverRequestController@index');
+Route::post('/turnoverrequest/submit', 'TurnoverRequestController@submit');
+Route::post('/returntosupplier/submit', 'ReturnToSupplierController@submit');
+Route::get('/returntosupplier/', 'ReturnToSupplierController@index');
+Route::get('/returntosupplier/{code}', 'ReturnToSupplierController@index');
+Route::post('/physicalinventorycount/submit', 'PhysicalInventoryCountController@submit');
+Route::get('/physicalinventorycount/', 'PhysicalInventoryCountController@index');
+Route::get('/physicalinventorycount/{code}', 'PhysicalInventoryCountController@index');
 
 
 

@@ -8,7 +8,7 @@ class TurnoverRequest extends Model
 {
 	public static function GetItemById($code){
     	$results = DB::table('@TURNOVERREQUEST')
-            ->innerJoin('@TURNOVERREQUESTITEM', '@TURNOVERREQUESTITEM.TurnOverRequestID', '=', '@TURNOVERREQUEST.TurnOverRequestID')
+            ->leftJoin('@TURNOVERREQUESTITEM', '@TURNOVERREQUESTITEM.TurnOverRequestID', '=', '@TURNOVERREQUEST.TurnOverRequestID')
             ->where('@TURNOVERREQUESTITEM.ItemCode',$code)
             ->get();
 
@@ -16,25 +16,27 @@ class TurnoverRequest extends Model
 	}
 
 	public static function GetAllItems(){
-		$results = DB::table('@TURNOVERREQUEST')->get();
+		$results = DB::table('@TURNOVERREQUEST')
+				->LeftJoin('@TURNOVERREQUESTITEM', '@TURNOVERREQUESTITEM.TurnOverRequestID', '=', '@TURNOVERREQUEST.TurnOverRequestID')
+				->get();
         return $results;
 	}
 
 	public static function ProcessTurnover($request){
 		$userId = $request->input('UserId');
-		$status = $request['Status'];
+		$status = $request->input('Status');
 		$requestDate = Date('Y-m-d H:i:s');
-		$Department = $request->input['Department'];
+		$department = $request->input('Department');
 
 		$result = DB::table('@TURNOVERREQUEST')->insertGetId(array(
         	'UserID' => $userId ,
         	'StatusID' => $status,
-            'RequestDate' => $transferDate,
-            'Department' => $Department
+            'RequestDate' => $requestDate,
+            'Department' => $department
             )
 		);
 
-		if($result) {
+		if((int) $result > 0) {
 			$items = $request->input('Items');
 			if(!empty($items)){
 				foreach ($items as $key => $value) {
@@ -49,17 +51,12 @@ class TurnoverRequest extends Model
 							  'isReceived' => 0
 							)
 					);
-                    
-                    /*$newQty = floatval($value['Qty']) - floatval($value['ToQty']); 
-					if($resultDetails){
-						DB::update('Update OITM set TreeQty = ? Where ItemCode = ? ', [$newQty, $value['ItemCode']]);
-					}*/
-				}
+                }
 			}
 
 		}
 
-	    if($result) return array('status' => 'ok', 'items' => $request->input('Items'), 'return_id' => $result);
+	    if((int) $result > 0) return array('status' => 'ok', 'items' => $request->input('Items'), 'return_id' => $result);
 		else return array('status' => 'failed', 'items' => $request->input('Items'), 'return_id' => $result);
 	}
 }

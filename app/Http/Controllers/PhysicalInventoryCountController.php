@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\WarehouseItems;
+use App\PhysicalInventoryCount;
 use DB;
 use Illuminate\Http\Request;
 
-class WarehouseController extends Controller
+class PhysicalInventoryCountController extends Controller
 {
     public function index($code = null)
     {
         $results = array();
-        $mi = new WarehouseItems();
+        $mi = new PhysicalInventoryCount();
         if(empty($name)){
             $results = $mi->GetAllItems();
         }else{
@@ -21,8 +21,8 @@ class WarehouseController extends Controller
     }
 
     public function submit(Request $request){  
-        $wi = new WarehouseItems();
-        $results = $wi->ProcessWarehouseTransfer($request);
+        $wi = new PhysicalInventoryCount();
+        $results = $wi->ProcessPhysicalInventoryCount($request);
         return response()->json($results);
     }
 }

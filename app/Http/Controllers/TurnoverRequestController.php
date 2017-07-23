@@ -7,11 +7,7 @@ use Illuminate\Http\Request;
 
 class TurnoverRequestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index($code = null)
     {
         $results = array();

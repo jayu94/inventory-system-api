@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class MaterialMaster extends Model
 {
-    //
-	protected $table = 'OITM';
-	
+  
 	public function GetItems(){
 		$result =  DB::select("select  Top 10
                                 ItemCode,  

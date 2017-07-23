@@ -25,7 +25,7 @@ class WarehouseItems extends Model
 
 	public static function ProcessWarehouseTransfer($request){
 		$userId = $request->input('UserId');
-		$status = $request['Status'];
+		$status = $request->input('Status');
 		$transferDate = Date('Y-m-d H:i:s');
 
 		$result = DB::table('@WAREHOUSETRANSFER')->insertGetId(array(
@@ -34,7 +34,7 @@ class WarehouseItems extends Model
             'TransferDate' => $transferDate)
 		);
 
-		if($result) {
+		if((int) $result > 0) {
 			$items = $request->input('Items');
 			if(!empty($items)){
 				foreach ($items as $key => $value) {
@@ -61,7 +61,7 @@ class WarehouseItems extends Model
 
 		}
 
-	    if($result) return array('status' => 'ok', 'items' => $request->input('Items'), 'return_id' => $result);
+	    if((int) $result > 0) return array('status' => 'ok', 'items' => $request->input('Items'), 'return_id' => $result);
 		else return array('status' => 'failed', 'items' => $request->input('Items'), 'return_id' => $result);
 	}
 }
