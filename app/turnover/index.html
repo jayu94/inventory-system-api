@@ -11,7 +11,7 @@
                 <div class="form-group">
                     <label for="requestingDepartment" class="col-sm-4 control-label">Requesting Department:</label>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control" id="requestingDepartment">
+                        <input type="text" class="form-control" id="requestingDepartment" ng-model="vm.requestingDepartment">
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                     <label for="trStatus" class="col-sm-4 control-label">TR Status:</label>
                     <div class="col-sm-8">
                         <div class="input-group">
-                            <input type="text" class="form-control" ng-disabled="true">
+                            <input type="text" class="form-control" ng-disabled="true" ng-model="vm.trStatus">
                             <span class="input-group-addon"><i class="fa fa-info-circle"></i></span>
                         </div>
                     </div>
@@ -36,7 +36,7 @@
                     <div class="col-sm-8">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                            <input type="date" class="form-control" placeholder="mm/dd/yyyy">
+                            <input type="date" class="form-control" placeholder="mm/dd/yyyy" ng-model="vm.requestDate">
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                         <tbody>
                             <tr ng-repeat="option in vm.table track by $index" ng-class="{ 'selected': vm.selected == $index }">
                                 <td class="text-center row-item" ng-click="vm.selectIndex($index)">
-                                    <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ item.rowNo }}
+                                    <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ option.RowNo }}
                                 </td>
                                 <td>
                                      <div class="input-group">
@@ -106,7 +106,7 @@
                                     <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.JobOrder">
                                 </td>
                                 <td class="text-center">
-                                    <input type="checkbox" class="" ng-disabled="false" ng-model="option.Received">
+                                    <input type="checkbox" class="" ng-disabled="false" ng-model="option.IsReceived">
                                 </td>
                             </tr>
                         </tbody>

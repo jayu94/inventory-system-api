@@ -1,15 +1,16 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', '$uibModal', 'itemService', turnoverController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', '$uibModal', 'itemService', 'turnoverService', turnoverController]
 
     angular.module('app').controller('turnoverController', turnoverController);
 
-    function turnoverController($http, $scope, $state, $stateParams, $uibModal, itemService) {
+    function turnoverController($http, $scope, $state, $stateParams, $uibModal, itemService, turnoverService) {
         var vm = this;
         
         vm.init = function(){
             vm.table = [];
+            vm.rowCount = 1;
             vm.items = [{
                 itemCode: "Item-Code 001",
                 itemName: "Item-Name 1",
@@ -73,6 +74,23 @@
 
 		vm.itemSelected = function(line, item){
 			angular.merge(line, item);
-		};
+        };
+        
+        vm.save = function(){
+
+            turnoverService.post({
+                UserID: '',
+                StatusID: 1,
+                RequestDate: vm.requestDate,
+                Department: vm.requestingDepartment,
+                Items: vm.table
+            }).then(
+				function(response){
+					console.log(response);
+				}, 
+				function(response){
+					console.log(response);
+				});
+        };
     }
 })();

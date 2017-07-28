@@ -17,7 +17,7 @@
                     vm.table = response.data.items;
                     console.log(response);
                 },
-                function(){
+                function(response){
                      console.log(response);
                 });
         }();

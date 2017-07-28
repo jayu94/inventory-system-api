@@ -3,11 +3,11 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', '$timeout', 'itemService', 'FileUploader', physicalInventoryController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', '$timeout', 'itemService', 'FileUploader', 'inventoryCountService', physicalInventoryController]
 
     angular.module('app').controller('physicalInventoryController', physicalInventoryController);
 
-    function physicalInventoryController($http, $scope, $state, $stateParams, $timeout, itemService, FileUploader) {
+    function physicalInventoryController($http, $scope, $state, $stateParams, $timeout, itemService, FileUploader, inventoryCountService) {
         var vm = this;
 
 		vm.init = function(){
@@ -135,6 +135,31 @@
 		vm.itemSelected = function(line, item){
 			angular.merge(line, item);
 		};
+
+		vm.save = function(){
+
+			inventoryCountService.post({
+				UserId: '0001',
+				Status: vm.picStatus,
+				Department: vm.department,
+				UploadDate: vm.uploadDate,
+				Remarks: vm.remarks,
+				ItemClass: vm.selectItem,
+				Location: vm.location,
+				AccountablePerson: vm.accountablePerson,
+				MajorAssetCategory: vm.majorAssetCategory,
+				CommodityGroup: vm.commodity,
+				Warehouse: vm.warehouse,
+				Items: vm.grTablePIC
+			}).then(
+				function(response){
+					console.log(response);
+				}, 
+				function(response){
+					console.log(response);
+				});
+		};
+
 
 		function to_json(workbook) {
 			var result = {};
