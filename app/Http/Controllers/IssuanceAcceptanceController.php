@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Issuance;
-use App\IssuanceItem;
+use App\IssuanceAcceptance;
+use App\IssuanceAcceptanceItem;
 use Illuminate\Http\Request;
 
-class IssuanceController extends Controller
+class IssuanceAcceptanceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class IssuanceController extends Controller
     public function index()
     {
         //
-		$items = Issuance::all();
+		$items = IssuanceAcceptance::all();
 		return response()->json($items);
     }
 
@@ -38,20 +38,21 @@ class IssuanceController extends Controller
      */
     public function store(Request $request)
     {
-        $issuance = new Issuance();
+        $issuance = new IssuanceAcceptance();
 		$issuance->UserID = $request->input('UserID');
-		$issuance->RequestingUserID = $request->input('RequestingUserID');
-		$issuance->RequestingUserDepartment = $request->input('RequestingUserDepartment');
+		$issuance->PONo = $request->input('PONo');		
 		$issuance->MIFRRGRNo = $request->input('MIFRRGRNo');
 		$issuance->StatusID = $request->input('StatusID');
+		$issuance->IssuanceID = $request->input('GiNo');
+		$issuance->IssuanceAcceptanceDate = date('Y-m-d H:i:s');
 		if($issuance->save()){
 			$items = $request->input('Items');
 			//$items = json_decode($items);
 			
 			if(count($items) > 0){
 				foreach($items as $item){
-					$iiItem = new IssuanceItem();
-					$iiItem->IssuanceID = $issuance->IssuanceID;
+					$iiItem = new IssuanceAcceptanceItem();
+					$iiItem->IssuanceAcceptanceID = $issuance->IssuanceAcceptanceID;
 					
 					if(!isset($item['ItemCode'])){
 						$response['items_failed']['NoItemCode'][] = $item;
@@ -88,7 +89,7 @@ class IssuanceController extends Controller
 			}
 			
 			$response['status'] = 'ok';
-			$response['Issuance'] = $issuance;
+			$response['IssuanceAcceptance'] = $issuance;
 		
 		}else{
 			$response['status'] = 'failed';
@@ -106,21 +107,21 @@ class IssuanceController extends Controller
     public function show(Request $request, $id)
     {
         //
-		$grObject = Issuance::query()
+		$grObject = IssuanceAcceptance::query()
 						->leftjoin('@STATUS as s', 's.ID', '=', '@ISSUANCE.StatusId')
 						->leftjoin('@OUSR as user','user.UserId','=','@ISSUANCE.UserId')
 						->whereColumn([
 							['@ISSUANCE.IssuanceId','=',$id]							
 						])					
 						->first([
-							'@ISSUANCE.*',
+							'@ISSUANCEACCEPTANCE.*',
 							's.NAME as Status',
 							'user.Name as UserName'
 						]);
 		
-		if(is_object($grObject) && $grObject->GrId != null){
-			$grObject->GiNo = 'GI-'.str_pad($grObject->IssuanceID,7,'0',STR_PAD_LEFT);
-			$grObject->items = IssuanceItem::findByIssuanceID($grObject->IssuanceID);
+		if(is_object($grObject) && $grObject->IssuanceAcceptanceID != null){
+			$grObject->IANo = 'IA-'.str_pad($grObject->IssuanceAcceptanceID,7,'0',STR_PAD_LEFT);
+			$grObject->items = IssuanceAcceptanceItem::findByIssuanceAcceptanceID($grObject->IssuanceAcceptanceID);
 		}else{
 			$grObject = new \stdClass();
 			$grObject->message = 'Not able to find any matching GR Document';
@@ -131,37 +132,14 @@ class IssuanceController extends Controller
     }
 	
 	/**
-     * Copy Approved Issuance to Issuance Acceptance Page
+     * Copy 
      *
      * @param  \App\Issuance  $issuance
      * @return \Illuminate\Http\Response
      */
 	public function copy(Request $request, $id)
     {
-        //
-		$grObject = Issuance::query()
-						->leftjoin('@STATUS as s', 's.ID', '=', '@ISSUANCE.StatusId')
-						->leftjoin('@OUSR as user','user.UserId','=','@ISSUANCE.UserId')
-						->whereColumn([
-							['@ISSUANCE.IssuanceId','=',$id],
-							['s.Name','=','Approved']												
-						])					
-						->first([
-							'@ISSUANCE.*',
-							's.NAME as Status',
-							'user.Name as UserName'
-						]);
-		
-		if(is_object($grObject) && $grObject->GrId != null){
-			$grObject->GiNo = 'GI-'.str_pad($grObject->IssuanceID,7,'0',STR_PAD_LEFT);
-			$grObject->items = IssuanceItem::findByIssuanceID($grObject->IssuanceID);
-		}else{
-			$grObject = new \stdClass();
-			$grObject->message = 'Not able to find any matching Issuance Document';
-			$grObject->items = array();
-		}
-		
-		return response()->json($grObject);
+        
     }
 
     /**
@@ -196,12 +174,36 @@ class IssuanceController extends Controller
     public function destroy($IssuanceID)
     {
         //
-		$gr = Issuance::find($IssuanceID);
+		$gr = IssuanceAcceptance::find($IssuanceID);
 		if($gr->delete()){
+			$items = IssuanceAcceptance::findByIssuanceAcceptanceID($IssuanceID);
+			foreach($items as $item){
+				$itemObject = IssuanceAcceptanceItem::find($item->EntryID);
+				$itemObject->delete();
+			}
 			$response['status'] = 'ok';
 		}else{
 			$response['status'] = 'failed';
 		}
 		return response()->json($response);
     }
+	
+	public function decide(Request $request){
+		$entryID = $request->input('EntryID');
+		$decision = $request->input('Decision');
+		
+		$response = array();
+		
+		$item = IssuanceAcceptanceItem::find($entryID);
+		$item->Decision = $decision;
+		$item->DecisionDate = date('Y-m-d H:i:s');
+		if($item->save()){
+			$response['status'] = 'ok';
+			$response['item'] = $item;
+		}else{
+			$response['status'] = 'failed';
+		}
+		
+		return response()->json($response);
+	}
 }
