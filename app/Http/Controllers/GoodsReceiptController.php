@@ -106,6 +106,39 @@ class GoodsReceiptController extends Controller
 						->leftjoin('@STATUS as s', 's.ID', '=', '@GOODSRECEIPT.GrStatusId')
 						->leftjoin('@OUSR as user','user.UserId','=','@GOODSRECEIPT.UserId')
 						->whereColumn([
+							['@GOODSRECEIPT.GrId','=',$id]						
+						])					
+						->first([
+							'@GOODSRECEIPT.*',
+							's.NAME as GrStatus',
+							'user.Name as UserName'
+						]);
+		
+		if(is_object($grObject) && $grObject->GrId != null){
+			$grObject->GrNo = 'GR-'.str_pad($grObject->GrId,7,'0',STR_PAD_LEFT);
+			$grObject->items = GoodsReceiptItem::findByDocEntry($grObject->GrId);
+		}else{
+			$grObject = new \stdClass();
+			$grObject->message = 'Not able to find any matching GR Document';
+			$grObject->items = array();
+		}
+		
+		return response()->json($grObject);
+    }
+	
+	/**
+     * Copy Approved Goods Receipt to Issuance page.
+     *
+     * @param  \App\GoodsReceipt  $goodsReceipt
+     * @return \Illuminate\Http\Response
+     */
+    public function copy(Request $request, $id)
+    {
+        //$id = $request->input('id');
+		$grObject = GoodsReceipt::query()
+						->leftjoin('@STATUS as s', 's.ID', '=', '@GOODSRECEIPT.GrStatusId')
+						->leftjoin('@OUSR as user','user.UserId','=','@GOODSRECEIPT.UserId')
+						->whereColumn([
 							['@GOODSRECEIPT.GrId','=',$id],
 							['s.Name','=','Approved'],						
 						])					

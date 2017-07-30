@@ -15,13 +15,10 @@ class VerifyCsrfToken extends BaseVerifier
         //
 		'goodsreceipt/*',
 		'goodsreceipt',
+		'issuance/*',
+		'issuanceacceptance/*',
 		'menus/*',
 		'payment/*',
 		'cart/*',
-        'items/*',
-        'warehouse/*',
-        'turnoverrequest/*',
-        'returntosupplier/*',
-        'physicalinventorycount/*'
     ];
 }

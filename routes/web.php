@@ -45,3 +45,27 @@ Route::get('/physicalinventorycount/{code}', 'PhysicalInventoryCountController@i
 
 Route::get('/goodsreceipt/items', 'GoodsReceiptController@index');
 Route::get('/goodsreceipt/edit/{id}', 'GoodsReceiptController@show');
+
+
+//Issuance Module
+//create issuance document
+Route::post('/issuance', 'IssuanceController@store');
+//retrieve issuance document
+Route::get('/issuance/retrieve/{id}', 'IssuanceController@show');
+//retrieve approved issuance document for issuance acceptance page
+Route::get('/issuance/copy/{id}', 'IssuanceController@copy');
+//get all issuance document
+Route::get('/issuance/items', 'IssuanceController@index');
+Route::get('/issuance/delete/{id}', 'IssuanceController@destroy');
+
+//Issuance Acceptance Module
+//get all issuance acceptance documents
+Route::get('/issuanceacceptance/items', 'IssuanceAcceptanceController@index');
+//create issuance acceptance document
+Route::post('/issuanceacceptance', 'IssuanceAcceptanceController@store');
+//retrieve issuance acceptance document
+Route::get('/issuanceacceptance/retrieve/{id}', 'IssuanceAcceptanceController@show');
+//delete issuance acceptance document
+Route::get('/issuanceacceptance/delete/{id}', 'IssuanceAcceptanceController@destroy');
+//update decision on issuance acceptance item
+Route::put('/issuanceacceptance/itemupdate', 'IssuanceAcceptanceController@decide');
