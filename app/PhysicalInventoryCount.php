@@ -15,11 +15,29 @@ class PhysicalInventoryCount extends Model
     }
 
 	public static function GetAllItems(){
-		return DB::table('@PHYSICALINVENTORYCOUNT')
-            ->leftJoin('@PHYSICALINVENTORYCOUNTITEM', '@PHYSICALINVENTORYCOUNTITEM.PICId', '=', '@PHYSICALINVENTORYCOUNT.ID')
-            ->get();
+		  $results = DB::table('@PHYSICALINVENTORYCOUNT')->get();
+
+      $itemsToReturn = array();
+      if(!empty($results)){
+          foreach ($results as $key => $value) {
+            $items =  json_decode(self::GetAllDetailItemsById($value->ID));
+            $turnoverRequestItems = array_merge((array)$value, array("Items" => $items));
+            array_push($itemsToReturn,$turnoverRequestItems);
+          }
+      }   
+      return $itemsToReturn;      
 
 	}
+
+  public static function GetAllDetailItemsById($id){
+    $data = DB::table('@PHYSICALINVENTORYCOUNTITEM')
+           ->where('@PHYSICALINVENTORYCOUNTITEM.PICId',$id)
+             ->get();
+        
+
+    return $data;
+
+  }
 
 	public static function ProcessPhysicalInventoryCount($request){
 		

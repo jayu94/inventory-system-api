@@ -16,11 +16,29 @@ class WarehouseItems extends Model
 	}
 
 	public static function GetAllItems(){
-		$results = DB::table('@WAREHOUSETRANSFER')
-            ->leftJoin('@WAREHOUSETRANSFERITEM', '@WAREHOUSETRANSFERITEM.WarehouseTransferID', '=', '@WAREHOUSETRANSFER.WTNo')
-            ->get();
+		$results = DB::table('@WAREHOUSETRANSFER')->get();
 
-        return $results;
+        $itemsToReturn = array();
+		if(!empty($results)){
+			foreach ($results as $key => $value) {
+				$items =  json_decode(self::GetAllWarehouseDetailItems($value->WTNo));
+				$warehouseTransferItems = array_merge((array)$value, array("Items" => $items));
+				array_push($itemsToReturn,$warehouseTransferItems);
+			}
+
+		}		
+        return $itemsToReturn;
+        
+	}
+
+	public static function GetAllWarehouseDetailItems($id){
+
+		$data = DB::table('@WAREHOUSETRANSFERITEM')
+					 ->where('@WAREHOUSETRANSFERITEM.WarehouseTransferID',$id)
+				     ->get();
+				
+
+		return $data;
 	}
 
 	public static function ProcessWarehouseTransfer($request){
