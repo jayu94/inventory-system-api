@@ -22,7 +22,7 @@ class TurnoverRequestController extends Controller
     }
 
     public function submit(Request $request){  
-        $wi = new TuronverRequest();
+        $wi = new TurnoverRequest();
         $results = $wi->ProcessTurnover($request);
         return response()->json($results);
     }
