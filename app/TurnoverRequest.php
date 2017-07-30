@@ -11,16 +11,33 @@ class TurnoverRequest extends Model
             ->leftJoin('@TURNOVERREQUESTITEM', '@TURNOVERREQUESTITEM.TurnOverRequestID', '=', '@TURNOVERREQUEST.TurnOverRequestID')
             ->where('@TURNOVERREQUESTITEM.ItemCode',$code)
             ->get();
+		return $results;
+	}
 
-         return $results;
+	public static function GetTurnoverRequestItems($itemId){
+		$data = DB::table('@TURNOVERREQUESTITEM')
+					 ->where('@TURNOVERREQUESTITEM.TurnOverRequestID',$itemId)
+				     ->get();
+				
+
+		return $data;
 	}
 
 	public static function GetAllItems(){
-		$results = DB::table('@TURNOVERREQUEST')
-				->LeftJoin('@TURNOVERREQUESTITEM', '@TURNOVERREQUESTITEM.TurnOverRequestID', '=', '@TURNOVERREQUEST.TurnOverRequestID')
-				->get();
-        return $results;
+		$results = DB::table('@TURNOVERREQUEST')->get();
+		$itemsToReturn = array();
+		if(!empty($results)){
+			foreach ($results as $key => $value) {
+				$items =  json_decode(self::GetTurnoverRequestItems($value->TurnOverRequestID));
+				$turnoverRequestItems = array_merge((array)$value, array("Items" => $items));
+				array_push($itemsToReturn,$turnoverRequestItems);
+			}
+
+		}		
+        return $itemsToReturn;
 	}
+
+	
 
 	public static function ProcessTurnover($request){
 		$userId = $request->input('UserId');
