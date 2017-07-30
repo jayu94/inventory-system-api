@@ -41,13 +41,13 @@ class TurnoverRequest extends Model
 			if(!empty($items)){
 				foreach ($items as $key => $value) {
 				    $resultDetails = DB::table('@TURNOVERREQUESTITEM')->insert(
-						array('TurnOverRequestID' => $result,
-							  'ItemCode' => $value['ItemCode'],
-							  'Specification' => $value['Specification'],
-							  'Quantity' => $value['Quantity'],
-							  'Reasons' => $value['Reasons'],
-							  'JobOrderNo' => $value['JobOrderNo'],
-							  'JobOrderDesc' => $value['JobOrderDesc'],
+                        array('TurnOverRequestID' => $result,
+							  'ItemCode' =>isset($value['ItemCode'])?$value['ItemCode']:'',
+							  'Specification' =>isset($value['Specification'])?$value['Specification']:'',
+							  'Quantity' =>isset($value['Quantity'])?$value['Quantity']:'',
+							  'Reasons' => isset($value['Reasons'])?$value['Reasons']:'',
+							  'JobOrderNo' => isset($value['JobOrderNo'])?$value['JobOrderNo']:'',
+							  'JobOrderDesc' =>isset($value['JobOrderDesc'])?$value['JobOrderDesc']:'',
 							  'isReceived' => 0
 							)
 					);

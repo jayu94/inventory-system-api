@@ -9,7 +9,7 @@ class PhysicalInventoryCount extends Model
 	public static function GetItemById($code){
     	return DB::table('@PHYSICALINVENTORYCOUNT')
             ->leftJoin('@PHYSICALINVENTORYCOUNTITEM', '@PHYSICALINVENTORYCOUNTITEM.PICId', '=', '@PHYSICALINVENTORYCOUNT.ID')
-            ->where('@PHYSICALINVENTORYCOUNTITEM.ItemCode',$code)ITEM
+            ->where('@PHYSICALINVENTORYCOUNTITEM.ItemCode',$code)
             ->get();
 
     }
@@ -57,21 +57,32 @@ class PhysicalInventoryCount extends Model
 				foreach ($items as $key => $value) {
 				    $resultDetails = DB::table('@PHYSICALINVENTORYCOUNTITEM')->insert(
 						array('PICId' => $result,
-							  'ItemCode' => $value['ItemCode'],
-							  'ItemDescription' => $value['Specification'],
-							  'UoM' => $value['UoM'],
-							  'Freeze' => $value['Freeze'],
-							  'Counted' => $value['Counted'],
-							  'Counter' => $value['Counter'],
-							  'Checker' => $value['Checker'],
-							  'Validator' => $value['Validator'],
-							  'Specification' => $value['Specification']
-                              'SerialNo' => $value['SerialNo'],
-                              'PropertyCode' => $value['PropertyCode'],
-                              'LocationOnRecord' => $value['LocationOnRecord'],
-                              'LocationPhysical' => $value['LocationPhysical'],
-                              'Variance' => $value['Variance'],
-                              'Remarks' => $value['Remarks']
+							  'ItemCode' => isset($value['ItemCode'])?$value['ItemCode']:'',
+							  'ItemDescription' => isset($value['ItemDescription'])?$value['ItemDescription']:'',
+							  'UoM' => isset($value['UoM'])?$value['UoM']:'',
+							  'Freeze' => isset($value['Freeze'])?$value['Freeze']:'',
+							  'Counted' => isset($value['Counted'])?$value['Counted']:'',
+							  'Counter' => isset($value['Counter'])?$value['Counter']:'',
+							  'Checker' => isset($value['Checker'])?$value['Checker']:'',
+							  'Validator' => isset($value['Validator'])?$value['Validator']:'',
+							  'Specification' => isset($value['Specification'])?$value['Specification']:'',
+                              'SerialNo' => isset($value['SerialNo'])?$value['SerialNo']:'',
+                              'PropertyCode' => isset($value['PropertyCode'])?$value['PropertyCode']:'',
+                              'LocationOnRecord' => isset($value['LocationOnRecord'])?$value['LocationOnRecord']:'',
+                              'LocationPhysical' => isset($value['LocationPhysical'])?$value['LocationPhysical']:'',
+                              'Variance' => isset($value['Variance'])?$value['Variance']:'',
+                              'Remarks' => isset($value['Remarks'])?$value['Remarks']:'',
+
+                              'AssetStatusOnRecord' => isset($value['AssetStatusOnRecord'])?$value['AssetStatusOnRecord']:'',
+                              'AssetStatusPhysical' => isset($value['AssetStatusPhysical'])?$value['AssetStatusPhysical']:'',
+                              'Warehouse' => isset($value['Warehouse'])?$value['Warehouse']:'',
+                              'QtyOnCountDate' => isset($value['QtyOnCountDate'])?$value['QtyOnCountDate']:'',
+                              'CountedQuantity' => isset($value['CountedQuantity'])?$value['CountedQuantity']:'',
+                              'AssetStatusVariance' => isset($value['AssetStatusVariance'])?$value['AssetStatusVariance']:'',
+                              'AssetStatusRemarks' => isset($value['AssetStatusRemarks'])?$value['AssetStatusRemarks']:'',
+                              'QuantityVariance' => isset($value['QuantityVariance'])?$value['QuantityVariance']:'',
+                              'QuantityRemarks' => isset($value['QuantityRemarks'])?$value['QuantityRemarks']:''
+
 							)
 					);
                 }
