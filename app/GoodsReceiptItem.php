@@ -11,7 +11,7 @@ class GoodsReceiptItem extends Model
 	public $timestamps = false;
 	protected $primaryKey = 'ItemEntry';
 	
-	public function findByDocEntry($id = null){
+	public static function findByDocEntry($id = null){
 		if($id == null){
 			return array();
 		}

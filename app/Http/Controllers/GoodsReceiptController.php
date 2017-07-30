@@ -73,7 +73,7 @@ class GoodsReceiptController extends Controller
 					$grItem->UoM = isset($item['UoM'])?$item['UoM']:'';
 					$grItem->SerialNo = isset($item['SerialNo'])?$item['SerialNo']:'';
 					$grItem->AssetNo = isset($item['AssetNo'])?$item['AssetNo']:'';
-					$grItem->PropertyCode =isset($item['AssetNo'])?$item['AssetNo']:'';
+					$grItem->PropertyCode =isset($item['PropertyCode'])?$item['PropertyCode']:'';
 					$grItem->Warranty = isset($item['Warranty'])?$item['Warranty']:'';
 					
 					if($grItem->save()){
@@ -105,20 +105,48 @@ class GoodsReceiptController extends Controller
 		$grObject = GoodsReceipt::query()
 						->leftjoin('@STATUS as s', 's.ID', '=', '@GOODSRECEIPT.GrStatusId')
 						->leftjoin('@OUSR as user','user.UserId','=','@GOODSRECEIPT.UserId')
-						->where('@GOODSRECEIPT.GrId',$id)
-						->get([
+						->whereColumn([
+							['@GOODSRECEIPT.GrId','=',$id],
+							['s.Name','=','Approved'],						
+						])					
+						->first([
 							'@GOODSRECEIPT.*',
 							's.NAME as GrStatus',
 							'user.Name as UserName'
 						]);
-		echo '<pre>';
-		print_r($grObject);
-		exit();
-		if(is_object($grObject) && $grObject['GrId'] != null){
-			$grObject['GrNo'] = 'GR-'.str_pad($grObject['GrId'],7,'0');
-			$grObject['items'] = GoodsReceiptItem::findByDocEntry($grObject['GrId']);
+		
+		if(is_object($grObject) && $grObject->GrId != null){
+			$grObject->GrNo = 'GR-'.str_pad($grObject->GrId,7,'0',STR_PAD_LEFT);
+			$grObject->items = GoodsReceiptItem::findByDocEntry($grObject->GrId);
 		}else{
-			$grObject['items'] = array();
+			$grObject = new \stdClass();
+			$grObject->message = 'Not able to find any matching GR Document';
+			$grObject->items = array();
+		}
+		
+		return response()->json($grObject);
+    }
+	
+	public function edit(Request $request, $id)
+    {
+        //$id = $request->input('id');
+		$grObject = GoodsReceipt::query()
+						->leftjoin('@STATUS as s', 's.ID', '=', '@GOODSRECEIPT.GrStatusId')
+						->leftjoin('@OUSR as user','user.UserId','=','@GOODSRECEIPT.UserId')
+						->where('@GOODSRECEIPT.GrId',$id)
+						->first([
+							'@GOODSRECEIPT.*',
+							's.NAME as GrStatus',
+							'user.Name as UserName'
+						]);
+		
+		if(is_object($grObject) && $grObject->GrId != null){
+			$grObject->GrNo = 'GR-'.str_pad($grObject->GrId,7,'0',STR_PAD_LEFT);
+			$grObject->items = GoodsReceiptItem::findByDocEntry($grObject->GrId);
+		}else{
+			$grObject = new \stdClass();
+			$grObject->message = 'Not able to find any matching GR Document';
+			$grObject->items = array();
 		}
 		
 		return response()->json($grObject);
