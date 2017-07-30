@@ -15,10 +15,28 @@ class ReturnToSupplier extends Model
     }
 
 	public static function GetAllItems(){
-		return DB::table('@RETURNTOSUPPLIER')
-            ->leftJoin('@RETURNTOSUPPLIERITEM', '@RETURNTOSUPPLIERITEM.ReturnToSupplierID', '=', '@RETURNTOSUPPLIER.ReturnToSupplierID')
-            ->get();
+		$results =  DB::table('@RETURNTOSUPPLIER')->get();
+		$itemsToReturn = array();
+		
+		if(!empty($results)){
+			foreach ($results as $key => $value) {
+				$items =  json_decode(self::GetAllItemsById($value->ReturnToSupplierID));
+				$returnToSupplierItems = array_merge((array)$value, array("Items" => $items));
+				array_push($itemsToReturn,$returnToSupplierItems);
+			}
+		}
 
+		return $itemsToReturn;
+	}
+
+	public static function GetAllItemsById($id){
+
+		$data = DB::table('@RETURNTOSUPPLIERITEM')
+					 ->where('@RETURNTOSUPPLIERITEM.ReturnToSupplierID',$id)
+				     ->get();
+				
+
+		return $data;
 	}
 
 	public static function ProcessReturnToSupplier($request){

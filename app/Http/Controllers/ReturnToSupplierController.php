@@ -5,7 +5,7 @@ use App\ReturnToSupplier;
 use DB;
 use Illuminate\Http\Request;
 
-class ReturnToSuppliertController extends Controller
+class ReturnToSupplierController extends Controller
 {
     
     public function index($code = null)
