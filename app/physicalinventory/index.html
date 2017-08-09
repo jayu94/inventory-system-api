@@ -189,6 +189,8 @@
                                             placeholder="Search Item"
                                             uib-typeahead="item as item.ItemCode for item in vm.getItems($viewValue)"
                                             typeahead-append-to-body="true"
+                                            typeahead-wait-ms="400"
+                                            typeahead-min-length="3"
                                             typeahead-editable="false"
                                             typeahead-on-select="vm.itemSelected(option, $item)"
                                             typeahead-template-url="app/shared/templates/item-typeahead.html"
@@ -323,8 +325,8 @@
                 </div>
                 <h4>&nbsp;</h4>
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
-                    <button type="button" class="btn btn-primary pull-right margin-left-5">Save</button>
+                    <button type="button" class="btn btn-default pull-right margin-left-5" ng-click="vm.submit()">Submit</button>
+                    <button type="button" class="btn btn-primary pull-right margin-left-5" ng-click="vm.submit()">Save</button>
                     <label type="button" class="btn btn-info pull-right margin-left-5" for="table-input">Import</label>
                     <button type="button" class="btn btn-success pull-right margin-left-5" ng-if="vm.selectItem == 'accountable'" ng-disabled="!vm.selectItem" ng-json-export-excel data="vm.grTablePIC" separator="," report-fields="vm.accountableItemHeaders" filename="'report'">Export to Excel</button>
                     <button type="button" class="btn btn-success pull-right margin-left-5" ng-if="vm.selectItem == 'warehouse'" ng-disabled="!vm.selectItem" ng-json-export-excel data="vm.grTablePIC" separator="," report-fields="vm.warehouseItemHeaders" filename="'report'">Export to Excel</button>

@@ -16,5 +16,7 @@
         function post(object){
             return $http.post(url + 'submit', object);
         }
+
+        return service;
     }
 })();

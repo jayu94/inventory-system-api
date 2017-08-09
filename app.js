@@ -14,7 +14,7 @@
 
 			// $rootScope.api = "http://192.168.0.107/csb/public/";
 			// $rootScope.api = "http://192.168.0.108:8080/inventory-api/public/";
-			$rootScope.api = "http://csb-api.azurewebsites.net/";
+			$rootScope.api = "http://csb-app.azurewebsites.net/api/";
 
 			// uncomment if login is implemented
 

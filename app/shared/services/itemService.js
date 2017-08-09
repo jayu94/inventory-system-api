@@ -52,18 +52,18 @@
                 }
             ];
 
-            $timeout(function(){
-                var result = _.filter(data, function(x){ 
-                    return x.ItemCode.toLowerCase().indexOf(query.toLowerCase()) > -1 ||
-                           x.ItemName.toLowerCase().indexOf(query.toLowerCase()) > -1; 
-                });
+            // $timeout(function(){
+            //     var result = _.filter(data, function(x){ 
+            //         return x.ItemCode.toLowerCase().indexOf(query.toLowerCase()) > -1 ||
+            //                x.ItemName.toLowerCase().indexOf(query.toLowerCase()) > -1; 
+            //     });
 
-                deferred.resolve(result);
-            }, 500);
+            //     deferred.resolve(result);
+            // }, 500);
 
-            return deferred.promise;
-            // return $http.get($rootScope.api + 'items', { params: { query: query, limit: limit }})
-            // .then(function(response){ console.log(response); return response.data; });
+            // return deferred.promise;
+            return $http.get($rootScope.api + 'items/' + query )
+            .then(function(response){ console.log(response); return response.data; });
         }
 
         return service;

@@ -129,6 +129,8 @@
                                             uib-typeahead="item as item.ItemCode for item in vm.getItems($viewValue)"
                                             typeahead-append-to-body="true"
                                             typeahead-editable="false"
+                                            typeahead-wait-ms="400"
+                                            typeahead-min-length="3"
                                             typeahead-on-select="vm.itemSelected(option, $item)"
                                             typeahead-template-url="app/shared/templates/item-typeahead.html"
                                             typeahead-loading="option.loading"

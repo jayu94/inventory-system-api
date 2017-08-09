@@ -71,6 +71,8 @@
                                             uib-typeahead="item as item.ItemCode for item in vm.getItems($viewValue)"
                                             typeahead-append-to-body="true"
                                             typeahead-editable="false"
+                                            typeahead-wait-ms="400"
+                                            typeahead-min-length="3"
                                             typeahead-on-select="vm.itemSelected(option, $item)"
                                             typeahead-template-url="app/shared/templates/item-typeahead.html"
                                             typeahead-loading="option.loading"
@@ -139,8 +141,8 @@
             </div>
             <h4>&nbsp;</h4>
             <div class="col-md-12">
-                <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
-                <button type="button" class="btn btn-primary pull-right margin-left-30">Save</button>
+                <button type="button" class="btn btn-default pull-right margin-left-5" ng-click="vm.submit()">Submit</button>
+                <button type="button" class="btn btn-primary pull-right margin-left-30" ng-click="vm.submit()">Save</button>
                 <button type="button" class="btn btn-primary pull-right">Copy From &and;</button>
                 <button type="button" class="btn btn-primary" ng-click="vm.openSearchModal()">Search</button>
                 

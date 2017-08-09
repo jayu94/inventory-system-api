@@ -136,7 +136,7 @@
 			angular.merge(line, item);
 		};
 
-		vm.save = function(){
+		vm.submit = function(){
 
 			inventoryCountService.post({
 				UserId: '0001',

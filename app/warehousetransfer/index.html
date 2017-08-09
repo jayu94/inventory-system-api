@@ -74,6 +74,8 @@
                                             uib-typeahead="item as item.ItemCode for item in vm.getItems($viewValue)"
                                             typeahead-append-to-body="true"
                                             typeahead-editable="false"
+                                            typeahead-wait-ms="400"
+                                            typeahead-min-length="3"
                                             typeahead-on-select="vm.itemSelected(option, $item)"
                                             typeahead-template-url="app/shared/templates/item-typeahead.html"
                                             typeahead-loading="option.loading"
@@ -103,19 +105,19 @@
                                     <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.CostCenterFrom">
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control input-medium text-center" ng-model="option.ToQty">
+                                    <input type="number" class="form-control input-medium text-center" required ng-model="option.ToQty">
                                 </td>
                                 <td>
-                                    <input type="number" string-to-number class="form-control input-medium text-center" ng-model="option.ToQtyRequested">
+                                    <input type="number" string-to-number class="form-control input-medium text-center" required ng-model="option.ToQtyRequested">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-model="option.ToWarehouse">
+                                    <input type="text" class="form-control input-medium" ng-model="option.ToWarehouse" required>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-model="option.ToCostCenter">
+                                    <input type="text" class="form-control input-medium" ng-model="option.ToCostCenter" required>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control input-medium" ng-model="option.Reasons">
+                                    <input type="text" class="form-control input-medium" ng-model="option.Reasons" required>
                                 </td>
                             </tr>
                         </tbody>

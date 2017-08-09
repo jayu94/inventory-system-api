@@ -7,17 +7,16 @@
 
     function warehouseTransferService($http, $rootScope, $localStorage, $state) {
         
-        var getItems = $rootScope.api + '/' + 'items'
-        var postWarehouse = $rootScope.api + '/' + 'warehouse/submit'
+        var getItems = $rootScope.api + '/' + 'items';
+        var postWarehouse = $rootScope.api + '/' + 'warehouse/submit';
 
         var service = {
             post: post,
             get : get
         };
 
-        function get() {
-            console.log(getItems);
-            return $http.get(getItems).then(function(response){
+        function get(query) {
+            return $http.get(getItems + '/' + query ).then(function(response){
                 return response.data;
             });
         }

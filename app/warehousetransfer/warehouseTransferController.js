@@ -17,17 +17,17 @@
 				vm.selected = null;
 			else
         		vm.selected = rowNo;
-        }
+        };
 
         vm.addRow = function(){
             vm.table.push({});
-        }
+        };
 
         vm.deleteRow = function(){
             if(vm.selected >= 0){
                 vm.table.splice(vm.selected, 1);
             }
-        }
+        };
 
         vm.duplicateRow = function(){
             if(vm.selected >= 0){
@@ -35,7 +35,7 @@
                 angular.merge(newRow, vm.table[vm.selected]);
                 vm.table.push(newRow);
             }
-        }
+        };
 
         vm.submit = function(status){
             warehouseTransferService.post({
@@ -45,15 +45,15 @@
                 Items: vm.table
             }).then(function(response){
                 console.log(response);
-            })
-        }
+            });
+        };
 
         vm.getItems = function(query){
             return warehouseTransferService.get(query, 10);
-        }
+        };
 
         vm.itemSelected = function(line, item){
             angular.merge(line, item);
-        }
+        };
     }
 })();

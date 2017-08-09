@@ -17,5 +17,6 @@
             return $http.post(url + 'submit', request);
         }
         
+        return service;
     }
 })();

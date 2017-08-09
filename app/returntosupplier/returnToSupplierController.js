@@ -15,7 +15,20 @@
 
         vm.save = function(){
 
-            returnService.post({}).then(
+            returnService.post({
+                UserId: '',
+                Status: 1,
+                Department: vm.department,
+                VendorCode: vm.vendorCode,
+                VendorName: vm.vendor,
+                Address: vm.address,
+                ContactPerson: vm.contactPerson,
+                ContactNumber: vm.contactNumber,
+                Items: {
+                    
+                }
+
+            }).then(
 				function(response){
 					console.log(response);
 				}, 

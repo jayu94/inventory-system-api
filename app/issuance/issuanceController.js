@@ -11,15 +11,15 @@
         vm.init = function(){
             vm.table = [];
 
-            goodsReceiptService.getByID(14).then(
-                function(response){
-                    vm.gr = response.data;
-                    vm.table = response.data.items;
-                    console.log(response);
-                },
-                function(response){
-                     console.log(response);
-                });
+            // goodsReceiptService.getByID(14).then(
+            //     function(response){
+            //         vm.gr = response.data;
+            //         vm.table = response.data.items;
+            //         console.log(response);
+            //     },
+            //     function(response){
+            //          console.log(response);
+            //     });
         }();
 
         vm.copyFrom = function (){

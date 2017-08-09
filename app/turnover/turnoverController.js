@@ -1,11 +1,11 @@
 (function() {
     'use strict';
 
-    var ctrl = ['$http','$scope', '$state', '$stateParams', '$uibModal', 'itemService', 'turnoverService', turnoverController]
+    var ctrl = ['$http','$scope', '$state', '$stateParams', '$uibModal', 'itemService', 'turnoverService', '$timeout', turnoverController]
 
     angular.module('app').controller('turnoverController', turnoverController);
 
-    function turnoverController($http, $scope, $state, $stateParams, $uibModal, itemService, turnoverService) {
+    function turnoverController($http, $scope, $state, $stateParams, $uibModal, itemService, turnoverService, $timeout) {
         var vm = this;
         
         vm.init = function(){
@@ -76,17 +76,20 @@
 			angular.merge(line, item);
         };
         
-        vm.save = function(){
+        vm.submit = function(){
 
             turnoverService.post({
-                UserID: '',
+                UserID: '01',
                 StatusID: 1,
-                RequestDate: vm.requestDate,
+                RequestDate: vm.requestDate || '07/30/2017',
                 Department: vm.requestingDepartment,
                 Items: vm.table
             }).then(
 				function(response){
-					console.log(response);
+                    console.log(response);
+                    $timeout(function(){
+                        location.reload();
+                    });
 				}, 
 				function(response){
 					console.log(response);
