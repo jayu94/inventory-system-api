@@ -1,0 +1,148 @@
+<div class="row">
+    <div class="col-md-12">
+        <form action="" class="form form-horizontal">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="user" class="col-sm-4 control-label">User:</label>
+                    <div class="col-sm-8">
+                       <div class="input-group">
+                            <input type="text" class="form-control" id="user" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="poNo" class="col-sm-4 control-label">PO No.:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="poNo" ng-disabled="true">
+                    </div>
+                </div>
+               <div class="form-group">
+                    <label for="mif" class="col-sm-4 control-label">MIF/RR/GR No.:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="mif" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="giNo" class="col-sm-4 control-label">GI No.:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="giNo" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="iaNo" class="col-sm-4 control-label">IA No.:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="iaNo" ng-disabled="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="iaStatus" class="col-sm-4 control-label">IA Status:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="iaStatus" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-info-circle"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="issuanceDate" class="col-sm-4 control-label">Date:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="issuanceDate">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="table-responsive" style="overflow:auto;">
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th>Row&nbsp;#</th>
+                                <th>Item Code</th>
+                                <th>Item Name</th>
+                                <th>Specification</th>
+                                <th>Uom</th>
+                                <th>Unit Price</th>
+                                <th>Quantity</th>
+                                <th>PO Items</th>
+                                <th>Decision</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in vm.table track by $index" ng-class="{ 'selected': vm.selected == $index }">
+                                <td class="text-center row-item" ng-click="vm.selectIndex($index)">
+                                    <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ $index + 1 }}
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.itemCode">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.itemName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.specification">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.uom">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.unitPrice"> 
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.poItems">
+                                </td>
+                                <td>
+                                     <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="item.itemData.itemCode">
+                                </td>
+                                <td>
+                                    <input type="text" value="Accept" class="form-control input-medium" ng-model="item.decision">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>&nbsp;</h4>
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary" ng-click="vm.addRow()">Add Row</button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.deleteRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Delete Row</button>
+                    <button type="button" class="btn btn-default" ng-click="vm.duplicateRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Duplicate Row</button>
+                </div>
+                <h5>&nbsp;</h5>
+                <div class="col-md-12">
+                    <div class="col-md-3"><strong>Approver:</strong></div>
+                    <div class="col-md-8">
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <h4>&nbsp;</h4>
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary pull-right">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

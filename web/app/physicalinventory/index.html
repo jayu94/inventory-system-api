@@ -1,0 +1,338 @@
+<div class="row">
+    <div class="col-md-12">
+        <form action="" class="form form-horizontal">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="user" class="col-sm-4 control-label">User:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="user" ng-disabled="true" ng-model='vm.user'>
+                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="department" class="col-sm-4 control-label">Department:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="department" ng-disabled="true" ng-model='vm.department'>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="picNo" class="col-sm-4 control-label">PIC No.:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="picNo" ng-disabled="true" ng-model='vm.picNo'>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="picDate" class="col-sm-4 control-label">PIC Date:</label>
+                    <div class="col-sm-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="picDate" placeholder="mm/dd/yyyy" ng-model='vm.picDate'>
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-1">
+                        <label for="time" class="col-sm-4 control-label" style="text-align:right !important;">Time:&nbsp;</label>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="time" ng-disabled="true" ng-model='vm.time'>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="picStatus" class="col-sm-4 control-label">PIC Status:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="picStatus" ng-disabled="true" ng-model='vm.picStatus'>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="uploadDate" class="col-sm-4 control-label" ng-disabled="true">Upload Date:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="uploadDate" ng-model='vm.uploadDate'>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="remarks" class="col-sm-4 control-label">Remarks:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="remarks" ng-model='vm.remarks'>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="selectItem" class="control-label col-md-4">Item class:</label>
+                        <div class="col-md-8">
+                            <select id="selectItem" ng-model="vm.selectItem" class="form-control" ng-change="vm.setHeaders()">
+                                <option value="accountable" >Accountable Items</option>
+                                <option value="warehouse">Warehouse Items</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="col-md-6" ng-if="vm.selectItem === 'warehouse'">
+                                <div class="form-group">
+                                    <label for="commodity" class="col-sm-4 control-label">Commodity Group:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="commodity" ng-model="vm.commodity">
+                                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-if="vm.selectItem === 'warehouse'">
+                                <div class="form-group">
+                                    <label for="warehouse" class="col-sm-4 control-label">Warehouse:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="warehouse" ng-model="vm.warehouse">
+                                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-if="vm.selectItem === 'accountable'">
+                                <div class="form-group">
+                                    <label for="location" class="col-sm-4 control-label">Location:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="location" ng-model="vm.location">
+                                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6" ng-if="vm.selectItem === 'accountable'">
+                                <div class="form-group">
+                                    <label for="accountablePerson" class="col-sm-4 control-label">Accountable Person:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="accountablePerson" ng-model="vm.accountablePerson">
+                                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-offset-6 col-md-6" ng-if="vm.selectItem === 'accountable'">
+                                <div class="form-group">
+                                    <label for="majorAssetCategory" class="col-sm-4 control-label">Major Asset Category:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="majorAssetCategory" ng-model="vm.majorAssetCategory">
+                                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </di>
+            </div>
+
+            <div class="col-md-12">
+                <div class="table-responsive" id="picTable">
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th>Row&nbsp;#</th>
+                                <th ng-if="vm.selectItem != 'warehouse' && vm.selectItem != 'accountable'"></th>
+                                <th ng-if="vm.selectItem != 'warehouse' && vm.selectItem != 'accountable'"></th>
+                                <th ng-if="vm.selectItem === 'warehouse'">Item No.</th>
+                                <th ng-if="vm.selectItem === 'warehouse'">Item Description</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Asset No.</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Asset Description</th>
+                                <th>Uom</th>
+                                <th>Freeze</th>
+                                <th>Counted</th>
+                                <th>Counter</th>
+                                <th>Checker</th>
+                                <th>Validator</th>
+
+                                <!-- For accountable -->
+                                <th ng-if="vm.selectItem === 'accountable'">Specification</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Serial No.</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Property Code</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Location (On Record)</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Location (Physical)</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Variance</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Remarks</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Asset Status (On Record)</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Asset Status (Physical)</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Variance</th>
+                                <th ng-if="vm.selectItem === 'accountable'">Remarks</th>
+
+                                <!-- For warehouse -->
+                                <th ng-if="vm.selectItem === 'warehouse'">Warehouse</th>
+                                <th ng-if="vm.selectItem === 'warehouse'">In-Whse Qty on Count Date</th>
+                                <th ng-if="vm.selectItem === 'warehouse'">Counted Quantity</th>
+                                <th ng-if="vm.selectItem === 'warehouse'">Variance</th>
+                                <th ng-if="vm.selectItem === 'warehouse'">Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody id="grtBody">
+                            <tr ng-repeat="option in vm.grTablePIC track by $index" ng-class="{ 'selected': vm.selected == $index }">
+                                <td class="text-center row-item" ng-click="vm.selectIndex($index)">
+                                    <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ option.RowNo }}</td>
+                                <!--Item No./Asset No. -->
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="asyncSelected"
+                                            placeholder="Search Item"
+                                            uib-typeahead="item as item.ItemCode for item in vm.getItems($viewValue)"
+                                            typeahead-append-to-body="true"
+                                            typeahead-wait-ms="400"
+                                            typeahead-min-length="3"
+                                            typeahead-editable="false"
+                                            typeahead-on-select="vm.itemSelected(option, $item)"
+                                            typeahead-template-url="app/shared/templates/item-typeahead.html"
+                                            typeahead-loading="option.loading"
+                                            class="form-control input-medium">
+                                        <span class="input-group-addon"><i class="fa" ng-class="{ 'fa-list': !option.loading, 'fa-refresh fa-spin': option.loading }"></i></span>
+                                    </div>
+                                </td>
+                                <!--Item Description/Asset Description -->
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.ItemDescription">
+                                </td>
+                                <!--UoM -->
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.UoM">
+                                </td>
+                                <!--Freeze -->
+                                <td>
+                                    <input type="checkbox" class="text-center" ng-model="option.Freeze">
+                                </td>
+                                <!--Counted -->
+                                <td>
+                                    <input type="checkbox" class="text-center" ng-disabled="true" ng-model="option.Counted">
+                                </td>
+                                <!--Counter -->
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Counter">
+                                </td>
+                                <!--Checker -->
+                                <td>
+                                     <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Checker">
+                                </td>
+                                <!--Validator -->
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Validator">
+                                </td>
+
+                            <!--For Assets and Accountables Items Only -->
+                                <!-- Specification -->
+                                <td ng-if="vm.selectItem === 'accountable'">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Specification">
+                                </td>
+                                <!-- Serial No. -->
+                                <td ng-if="vm.selectItem === 'accountable'">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.SerialNo">
+                                </td>
+                                <!-- Property Tag Code -->
+                                <td ng-if="vm.selectItem === 'accountable'">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.PropertyCode">
+                                </td>
+                                <!-- Location (On Record) -->
+                                <td ng-if="vm.selectItem === 'accountable'">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.LocationOnRecord">
+                                </td>
+                                <!-- Location (Physical) -->
+                                <td ng-if="vm.selectItem === 'accountable'">
+                                    <input type="text" class="form-control input-medium" ng-model="option.LocationPhysical">
+                                </td>
+                                <!-- Variance -->
+                                <td ng-if="vm.selectItem === 'accountable'">
+                                    <input type="text" class="form-control input-medium" ng-model="option.Variance">
+                                </td>
+                                <!-- Remarks -->
+                                <td ng-if="vm.selectItem === 'accountable'">
+                                    <input type="text" class="form-control input-medium" ng-model="option.Remarks">
+                                </td>
+                                <!-- Asset Status (On Record) -->
+                                <td ng-if="vm.selectItem === 'accountable'">
+                                    <input type="text" class="form-control input-medium" ng-model="option.AssetStatusOnRecord">
+                                </td>
+                                <!-- Asset Status (Physical) -->
+                                <td ng-if="vm.selectItem === 'accountable'">
+                                    <input type="text" class="form-control input-medium" ng-model="option.AssetStatusPhysical">
+                                </td>
+                                <!-- Variance -->
+                                <td ng-if="vm.selectItem === 'accountable'">
+                                    <input type="text" class="form-control input-medium" ng-model="option.AssetStatusVariance">
+                                </td>
+                                <!-- Remarks -->
+                                <td ng-if="vm.selectItem === 'accountable'">
+                                    <input type="text" class="form-control input-medium" ng-model="option.AssetStatusRemarks">
+                                </td>
+
+
+                            <!--For Warehouse Item Only -->
+                                <!-- Warehouse -->
+                                <td ng-if="vm.selectItem === 'warehouse'">
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Warehouse">
+                                </td>
+                                <!-- In-Whse Qty on Count Date -->
+                                <td ng-if="vm.selectItem === 'warehouse'">
+                                    <input type="text" class="form-control input-medium" ng-model="option.QtyOnCountDate">
+                                </td>
+                                <!-- Counted Quantity -->
+                                <td ng-if="vm.selectItem === 'warehouse'">
+                                    <input type="text" class="form-control input-medium" ng-model="option.CountedQuantity">
+                                </td>
+                                <!-- Variance -->
+                                <td ng-if="vm.selectItem === 'warehouse'">
+                                    <input type="text" class="form-control input-medium" ng-model="option.QuantityVariance">
+                                </td>
+                                <!-- Remarks -->
+                                <td ng-if="vm.selectItem === 'warehouse'">
+                                    <input type="text" class="form-control input-medium" ng-model="option.QuantityRemarks">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>&nbsp;</h4>
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary" ng-click="vm.addRow()">Add Row</button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.deleteRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Delete Row</button>
+                </div>
+                <h5>&nbsp;</h5>
+                <div class="col-md-12">
+                    <div class="col-md-3"><strong>Approver:</strong></div>
+                    <div class="col-md-8">
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <h4>&nbsp;</h4>
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-default pull-right margin-left-5" ng-click="vm.submit()">Submit</button>
+                    <button type="button" class="btn btn-primary pull-right margin-left-5" ng-click="vm.submit()">Save</button>
+                    <label type="button" class="btn btn-info pull-right margin-left-5" for="table-input">Import</label>
+                    <button type="button" class="btn btn-success pull-right margin-left-5" ng-if="vm.selectItem == 'accountable'" ng-disabled="!vm.selectItem" ng-json-export-excel data="vm.grTablePIC" separator="," report-fields="vm.accountableItemHeaders" filename="'report'">Export to Excel</button>
+                    <button type="button" class="btn btn-success pull-right margin-left-5" ng-if="vm.selectItem == 'warehouse'" ng-disabled="!vm.selectItem" ng-json-export-excel data="vm.grTablePIC" separator="," report-fields="vm.warehouseItemHeaders" filename="'report'">Export to Excel</button>
+                    <input type="file" class="hidden" id="table-input" name="table-input" nv-file-select uploader="vm.uploader">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

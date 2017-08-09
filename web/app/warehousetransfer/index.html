@@ -1,0 +1,159 @@
+<div class="row">
+    <div class="col-md-12">
+        <form action="" class="form form-horizontal">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="user" class="col-sm-4 control-label">User:</label>
+                    <div class="col-sm-8">
+                       <div class="input-group">
+                            <input type="text" class="form-control" id="user" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="wtNo" class="col-sm-4 control-label">WT No.:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="wtNo" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="wtStatus" class="col-sm-4 control-label">WT Status:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="wtStatus" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="transferDate" class="col-sm-4 control-label">Transfer Date:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="transferDate" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="table-responsive" style="overflow:auto;">
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Row&nbsp;#</th>
+                                <th rowspan="2">Item Code</th>
+                                <th rowspan="2">Item Name</th>
+                                <th rowspan="2">Uom</th>
+                                <th rowspan="2">Unit Price</th>
+                                <th colspan="4" class="th-from">FROM</th>
+                                <th colspan="4" class="th-to">TO</th>
+                                <th rowspan="2">Reason for Transfer</th>
+                            </tr>
+                            <tr>
+                                <th class="th-from">Original Quantity</th>
+                                <th class="th-from">Quantity Requested</th>
+                                <th class="th-from">Warehouse</th>
+                                <th class="th-from">Cost Center</th>
+
+                                <th class="th-to">Original Quantity</th>
+                                <th class="th-to">Quantity Requested</th>
+                                <th class="th-to">Warehouse</th>
+                                <th class="th-to">Cost Center</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="option in vm.table track by $index" ng-class="{ 'selected': vm.selected == $index }">
+                                <td class="text-center row-item" ng-click="vm.selectIndex($index)">
+                                    <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ $index + 1 }}
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="asyncSelected" 
+                                            placeholder="Search Item" 
+                                            uib-typeahead="item as item.ItemCode for item in vm.getItems($viewValue)"
+                                            typeahead-append-to-body="true"
+                                            typeahead-editable="false"
+                                            typeahead-wait-ms="400"
+                                            typeahead-min-length="3"
+                                            typeahead-on-select="vm.itemSelected(option, $item)"
+                                            typeahead-template-url="app/shared/templates/item-typeahead.html"
+                                            typeahead-loading="option.loading"
+                                            class="form-control input-medium">
+                                        <span class="input-group-addon"><i class="fa" ng-class="{ 'fa-list': !option.loading, 'fa-refresh fa-spin': option.loading }"></i></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.ItemName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Uom">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium text-right" ng-disabled="true" ng-model="option.Price"> 
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium text-center" ng-disabled="true" ng-model="option.Qty">
+                                </td>
+                                <td>
+                                     <input type="text" string-to-number class="form-control input-medium text-center" ng-disabled="true" ng-model="option.QtyNeeded">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.WarehouseFrom">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.CostCenterFrom">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control input-medium text-center" required ng-model="option.ToQty">
+                                </td>
+                                <td>
+                                    <input type="number" string-to-number class="form-control input-medium text-center" required ng-model="option.ToQtyRequested">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-model="option.ToWarehouse" required>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-model="option.ToCostCenter" required>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-model="option.Reasons" required>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>&nbsp;</h4>
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary" ng-click="vm.addRow()">Add Row</button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.deleteRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Delete Row</button>
+                    <button type="button" class="btn btn-default" ng-click="vm.duplicateRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Duplicate Row</button>
+                </div>
+                <h5>&nbsp;</h5>
+                <div class="col-md-12">
+                    <div class="col-md-3"><strong>Approver:</strong></div>
+                    <div class="col-md-8">
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <h4>&nbsp;</h4>
+               <div class="col-md-12">
+                    <button type="button" class="btn btn-default pull-right margin-left-5" ng-click="vm.submit(2)">Submit</button>
+                    <button type="button" class="btn btn-primary pull-right margin-left-30" ng-click="vm.submit(1)">Save</button>
+                    <button type="button" class="btn btn-success pull-right">Copy From &and;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<base href="/">
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Inventory System</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimal-ui" />
+		<!-- FONTS -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+		<!-- PLUGINS -->
+		<link rel="stylesheet" href="lib/angular-loading-bar/src/loading-bar.css" media="all">
+		<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.min.css">
+
+		<!-- CUSTOM -->
+		<link rel="stylesheet" href="assets/css/styles.css">
+	</head>
+	<body ng-app="app">
+		<div ng-include="'app/shared/header/index.html'" ng-controller="headerController as header"></div>
+		<div class="col-lg-12">
+			<ui-view></ui-view>
+			<h1>&nbsp;</h1>
+		</div>
+
+		<!-- PLUGINS -->
+		<script text="javascript" src="lib/jquery/jquery-3.2.1.min.js"></script>
+		<script text="javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+		<script text="javascript" src="lib/lodash//lodash.js"></script>
+		<script text="javascript" src="lib/FileSaver.js-master/FileSaver.min.js"></script>
+		<script text="javascript" src="lib/js-xlsx/xlsx.core.min.js"></script>
+		<script text="javascript" src="lib/js-xlsx/xlsx.full.min.js"></script>
+
+		<!-- ANGULAR -->
+		<script text="javascript" src="lib/angular/angular.min.js"></script>
+		<script text="javascript" src="lib/angular-animate/angular-animate.min.js"></script>
+		<script text="javascript" src="lib/angular-touch/angular-touch.min.js"></script>
+		<script text="javascript" src="lib/angular-sanitize/angular-sanitize.min.js"></script>
+		<script text="javascript" src="lib/angular-file-upload/angular-file-upload.min.js"></script>
+
+		<script text="javascript" src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script text="javascript" src="lib/angular-loading-bar/src/loading-bar.js"></script>
+		<script text="javascript" src="lib/ngstorage/ngStorage.min.js"></script>
+		<script text="javascript" src="lib/angular-bootstrap/ui-bootstrap-tpls-2.5.0.min.js"></script>
+		<script text="javascript" src="lib/json-export-excel/src/json-export-excel.js"></script>
+
+		<!-- MAIN -->
+		<script text="javascript" src="app.js"></script>
+		<script text="javascript" src="app/shared/header/headerController.js"></script>
+		<script text="javascript" src="app/shared/services/messageService.js"></script>
+		<script text="javascript" src="app/shared/services/userService.js"></script>
+		<script text="javascript" src="app/shared/services/warehouseTransferService.js"></script>
+		<script text="javascript" src="app/route.js"></script>
+		<script text="javascript" src="app/config.js"></script>
+		<script text="javascript" src="app/shared/directives.js"></script>
+
+		<!-- SERVICES -->
+		<script text="javascript" src="app/shared/services/itemService.js"></script>
+		<script text="javascript" src="app/shared/services/purchaseOrderService.js"></script>
+		<script text="javascript" src="app/shared/services/goodsReceiptService.js"></script>
+		<script text="javascript" src="app/shared/services/issuanceService.js"></script>
+		<script text="javascript" src="app/shared/services/turnoverService.js"></script>
+		<script text="javascript" src="app/shared/services/returnService.js"></script>
+		<script text="javascript" src="app/shared/services/inventoryCountService.js"></script>
+
+
+		<!-- CONTROLLERS -->
+		<script text="javascript" src="app/goodreceipt/goodreceiptController.js"></script>
+		<script text="javascript" src="app/issuance/issuanceController.js"></script>
+		<script text="javascript" src="app/issuanceacceptance/issuanceAcceptanceController.js"></script>
+		<script text="javascript" src="app/physicalinventory/physicalInventoryController.js"></script>
+
+		<script text="javascript" src="app/receivingRequest/receivingRequestController.js"></script>
+		<script text="javascript" src="app/returnToSupplier/returnToSupplierController.js"></script>
+		<script text="javascript" src="app/turnover/turnoverController.js"></script>
+		<script text="javascript" src="app/warehouseTransfer/warehouseTransferController.js"></script>
+		
+	</body>
+</html>

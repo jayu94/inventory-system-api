@@ -1,0 +1,205 @@
+<div class="row">
+    <div class="col-md-12">
+        <form action="" class="form form-horizontal">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="user" class="col-sm-4 control-label">User:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="user" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="warehouse" class="col-sm-4 control-label">Warehouse:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="warehouse" ng-disabled="true">
+                    </div>
+                </div>
+               <div class="form-group">
+                    <label for="vendorCode" class="col-sm-4 control-label">Vendor Code:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="vendorCode" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="vendorName" class="col-sm-4 control-label">Vendor Name:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="vendorName" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-list"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address" class="col-sm-4 control-label">Address:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="address" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contactPerson" class="col-sm-4 control-label">Contact Person:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="contactPerson" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="contactNumber" class="col-sm-4 control-label">Contact Number:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="contactNumber" ng-disabled="true">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="rrNo" class="col-sm-4 control-label">RR No.:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="rrNo" ng-disabled="true">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="rrStatus" class="col-sm-4 control-label">RR Status:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-disabled="true" id="rrStatus" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-info-circle"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="receivingDate" class="col-sm-4 control-label">Receiving Date:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="date" class="form-control" placeholder="mm/dd/yyyy" id="receivingDate">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label for="poNo" class="col-sm-4 control-label">PO No.:</label>
+                    <div class="col-sm-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-disabled="true" id="poNo" ng-disabled="true">
+                            <span class="input-group-addon"><i class="fa fa-info-circle"></i></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="deliveryReceipt" class="col-sm-4 control-label">Delivery Receipt No.:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="deliveryReceipt">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="salesInvoice" class="col-sm-4 control-label">Sales Invoice No.:</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="salesInvoice">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="table-responsive" style="overflow:auto;">
+                    <table class="table custom-table">
+                        <thead>
+                            <tr>
+                                <th>Row&nbsp;#</th>
+                                <th>SAP Item Code</th>
+                                <th>Item Name</th>
+                                <th>Specification</th>
+                                <th>Uom</th>
+                                <th>Unit Price</th>
+                                <th>Purchased Quantity</th>
+                                <th>Received Quantity</th>
+                                <th>Place of Delivery</th>
+                                <th>Asset No</th>
+                                <th>Serial No.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="option in vm.table track by $index" ng-class="{ 'selected': vm.selected == $index }">
+                                <td class="text-center row-item" ng-click="vm.selectIndex($index)">
+                                    <i class="fa fa-arrow-right " aria-hidden="true"></i>&nbsp;{{ $index + 1 }}
+                                </td>
+                                <td>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="asyncSelected" 
+                                            placeholder="Search Item" 
+                                            uib-typeahead="item as item.ItemCode for item in vm.getItems($viewValue)"
+                                            typeahead-append-to-body="true"
+                                            typeahead-editable="false"
+                                            typeahead-wait-ms="400"
+                                            typeahead-min-length="3"
+                                            typeahead-on-select="vm.itemSelected(option, $item)"
+                                            typeahead-template-url="app/shared/templates/item-typeahead.html"
+                                            typeahead-loading="option.loading"
+                                            class="form-control input-medium">
+                                        <span class="input-group-addon"><i class="fa" ng-class="{ 'fa-list': !option.loading, 'fa-refresh fa-spin': option.loading }"></i></span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.ItemName">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.Specification">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="true" ng-model="option.UoM">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium text-right" ng-disabled="true" ng-model="option.UnitPrice"> 
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium text-center" ng-disabled="true" ng-model="option.Purchasedquantity">
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control input-medium text-center" ng-disabled="false" ng-model="option.Receivedquantity">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.PlaceOfDelivery">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.AssetNo">
+                                </td>
+                                <td class="text-center">
+                                    <input type="text" class="form-control input-medium" ng-disabled="false" ng-model="option.SerialNo">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h4>&nbsp;</h4>
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-primary" ng-click="vm.addRow()">Add Row</button>
+                    <button type="button" class="btn btn-danger" ng-click="vm.deleteRow()" ng-disabled="vm.selected === null || vm.selected === undefined">Delete Row</button>
+                </div>
+                <h5>&nbsp;</h5>
+                <div class="col-md-12">
+                    <div class="col-md-3"><strong>Approver:</strong></div>
+                    <div class="col-md-8">
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                        <div class="col-md-4">Test</div>
+                        <div class="col-md-8 text-success"><b>Approved (<i>03/10/2017</i>)</b></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <h4>&nbsp;</h4>
+                <div class="col-md-12">
+                    <button type="button" class="btn btn-default pull-right margin-left-5">Submit</button>
+                    <button type="button" class="btn btn-primary pull-right margin-left-30">Save</button>
+                    <button type="button" class="btn btn-primary pull-right">Copy From &and;</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
